@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
+    <title>help</title>
+    <link  rel="stylesheet" href='../css/reset.css'></link>
+    <style>
+    .search_css{
+      height: 2em;
+      line-height: 2em;
+      background-color: transparent;
+    }
+    .indexCSS{
+      list-style-type: none;
+      height: 3em;
+      line-height: 3em;
+      background-color: #42b712;
+      color: white;
+      max-width: 100%;
+      font-size: 1.2em;
+    }
+    .title_content{
+      height: 2.5em;
+      line-height: 2.5em;
+      background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(rgba(234, 233, 233, 1)));
+    }
+    .title_content_date{
+      float: left;
+      margin-left: 1em;
+    }
+    .title_content_date_fr{
+      float: right;
+      margin-right: 1em;
+    }
+    .tel{
+        font-weight: 700;
+      }
+      .login{
+        margin-left: 2em;
+      }
+    .col-sm:hover{
+      background-color: yellow;
+      cursor: pointer;
+      color: blue;
+    }
+    .col-sm a:hover{
+      color: blue;
+    }
+
+    .col-sm{
+        float: left;
+        width: 25%;
+        text-align: center;
+    }
+    .col-sm a{
+        color: white;
+    }
+    .content{
+        background-color: #fff;
+        width: 1100px;
+        min-height: 600px;
+        margin: 0px auto;
+        border-left: 1px solid #CCCCCC;
+        border-right: 1px solid #CCCCCC;
+        border-bottom: 1px solid #CCCCCC;
+    }
+    .content_img{
+        height: 6em;
+        line-height: 6em;
+        background-color: bisque;
+        margin-left: .5em;
+    }
+    .content_img1{
+        background-color: gray;
+        margin-top: 1em;
+    }
+    .content_main{
+        margin-top: 2em;
+    }
+    .pub_persion_info{
+      width: 100%;
+      border: 1px dashed blue;
+      margin: 1em .4em;
+    }
+    .pub_persion_info_tr{
+      height: 1.5em;
+      line-height: 1.5em;
+    }
+    .connectcss{
+      color: blue;
+      margin-top: 1em;
+      display: inline-block;
+    }
+    </style>
+    <script></script>
+  </head>
+  <body>
+        <div class="">
+        <div class="title_content">
+            <div class="title_content_date">
+            免费发布领队信息网, 今天是{{year}}年{{month}}月{{day}}日
+            </div>
+            <div class="title_content_date_fr">
+            <span class="tel">
+            Tel: 188-8888-8888
+            </span>
+            <span class="login">
+                <a href="#" onclick="reginst()">注册</a> | <a href="#" onclick="login()">登录</a>
+            </span>
+            </div>
+        </div>
+        <div class="search_css">
+            <marquee behavior="alternate">
+            <span style="color: blue; font-weight: 700;">普通用户：</span>
+            <span>每天发帖上限1条</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color: blue; font-weight: 700;">会员用户:</span>&nbsp;&nbsp;
+            <span>每天发帖上限100条  帖子审核快速通道</span>
+            </marquee>
+        </div>
+        <div class="container indexCSS">
+            <div class="row">
+            <div class="col-sm" onclick="goTo(1)">
+            <a href="#">首页</a>
+            </div>
+            <div class="col-sm"  onclick="goTo(2)">
+            <a href="javascript:location.reload();" >免费发布</a>
+            </div>
+            <div class="col-sm"  onclick="goTo(3)">
+            <a>夜场直招</a>
+            </div>
+            <div class="col-sm"  onclick="goTo(4)">
+            <a>使用帮助</a>
+            </div>
+        </div>
+        </div>
+        <div class="content">
+            <div style="height: 1em;"></div>
+            <div style="width: 70%; display: inline-block;">
+                <div class="content_img"></div>
+                <div class="content_img content_img1"></div>
+                <div class="content_main">
+                    <div style="margin-left: 1em; font-size: 1.4em;">这个啊啊士大夫进口量氨基酸的考虑房价阿萨德解放路</div>
+                    <div style="height: 1px; background-color: gray; margin-left: .2em; margin-top: 2em;"></div>
+                    <div >
+                        <div>
+                            <span style="margin-top: 1em; display: inline-block; margin-left: 1em;">发布时间：2020年5月5日</span>
+                        </div>
+                        <div style="height: 1px; margin-left: .2em; margin-top: 1em;"></div>
+                        <p style="margin: .5em;">
+                                南京新街口夜场招聘佳丽「小费最高的KTV招聘」日结模特；谈到小费高，
+                                作为求职南京夜场招聘佳丽模特岗位的你应该知道我们做的就是高端商务场，本公司正常营业中，如果你现在需要一份ktv工作，可以跟我们联系。
+                                南京新街口夜场招聘佳丽「小费最高的KTV招聘」日结模特；谈到小费高，
+                                作为求职南京夜场招聘佳丽模特岗位的你应该知道我们做的就是高端商务场，本公司正常营业中，如果你现在需要一份ktv工作，可以跟我们联系。
+                                南京新街口夜场招聘佳丽「小费最高的KTV招聘」日结模特；谈到小费高，
+                                作为求职南京夜场招聘佳丽模特岗位的你应该知道我们做的就是高端商务场，本公司正常营业中，如果你现在需要一份ktv工作，可以跟我们联系。
+                                南京新街口夜场招聘佳丽「小费最高的KTV招聘」日结模特；谈到小费高，
+                                作为求职南京夜场招聘佳丽模特岗位的你应该知道我们做的就是高端商务场，本公司正常营业中，如果你现在需要一份ktv工作，可以跟我们联系。
+                                南京新街口夜场招聘佳丽「小费最高的KTV招聘」日结模特；谈到小费高，
+                                作为求职南京夜场招聘佳丽模特岗位的你应该知道我们做的就是高端商务场，本公司正常营业中，如果你现在需要一份ktv工作，可以跟我们联系。
+                                南京新街口夜场招聘佳丽「小费最高的KTV招聘」日结模特；谈到小费高，
+                                作为求职南京夜场招聘佳丽模特岗位的你应该知道我们做的就是高端商务场，本公司正常营业中，如果你现在需要一份ktv工作，可以跟我们联系。
+                                南京新街口夜场招聘佳丽「小费最高的KTV招聘」日结模特；谈到小费高，
+                                作为求职南京夜场招聘佳丽模特岗位的你应该知道我们做的就是高端商务场，本公司正常营业中，如果你现在需要一份ktv工作，可以跟我们联系。
+                                南京新街口夜场招聘佳丽「小费最高的KTV招聘」日结模特；谈到小费高，
+                                作为求职南京夜场招聘佳丽模特岗位的你应该知道我们做的就是高端商务场，本公司正常营业中，如果你现在需要一份ktv工作，可以跟我们联系。
+                                南京新街口夜场招聘佳丽「小费最高的KTV招聘」日结模特；谈到小费高，
+                                作为求职南京夜场招聘佳丽模特岗位的你应该知道我们做的就是高端商务场，本公司正常营业中，如果你现在需要一份ktv工作，可以跟我们联系。
+                                南京新街口夜场招聘佳丽「小费最高的KTV招聘」日结模特；谈到小费高，
+                                作为求职南京夜场招聘佳丽模特岗位的你应该知道我们做的就是高端商务场，本公司正常营业中，如果你现在需要一份ktv工作，可以跟我们联系。
+                        </p>
+                        <div style="    margin: 1em .5em; font-size: .9em; color: red;">
+                            <div><img style="width: 9em;" src="../img/tishi.gif"></div>
+                            <div>要求提前汇款或缴纳定金或保证金的均属诈骗,经网站核实的被举报信息,将直接删除,构建一个安全的免费发布信息平台!</div>
+                        </div>
+                        <div class="pub_persion_info">
+                          <table width="100%" style="margin: 1em;">
+                            <tbody>
+                              <tr class="pub_persion_info_tr">
+                                <td><span class="fb"><strong>会员身份：</strong></span>潇总带队											</td>
+                                <td><span class="fred fb fs"><strong>联&nbsp;&nbsp;系&nbsp;&nbsp;人</strong>：</span>潇总</td>
+                              </tr>
+                            <tr class="pub_persion_info_tr">
+                              <td><span class="fb"><strong>单位名称：</strong></span>潇总带队</td>
+                              <td><span class="fred fb"><strong>联系电话：</strong></span>13268322032</td>
+                            </tr>
+                            <tr class="pub_persion_info_tr">
+                              <td><span class="fb"><strong>所在城市：</strong></span>广东&nbsp;&gt;&gt;&nbsp;广州</td>
+                              <td><span class="fred fb"><strong>微信咨询：</strong></span>107398979@qq.com</td>
+                            </tr>
+                            
+                            <tr class="pub_persion_info_tr">
+                              <td><span class="fb"><strong>本店场次：</strong></span>3000起</td>
+                              <td><span class="fred fb"><strong>联系地址：</strong></span>市中心长期招模特佳丽</td>
+                            </tr>
+                            
+                            <tr class="pub_persion_info_tr">
+                              <td colspan="4"><span class="connectcss" id="tishilianxiwo">联系我时请说明是从夜场在线网看到的，这样我会给你最大的优惠！</span>
+                              <script type="text/javascript">
+                                document.getElementById("tishilianxiwo").innerHTML = "联系我时请说明是从夜场在线网看到的，这样我会给你最大的优惠！";
+                              </script></td>
+                            </tr>
+                          </tbody></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 27%; background-color: rebeccapurple; display: inline-block; margin-left: 1em;">
+
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <div style="margin: 2em;">
+                <a>关于我们 </a>| 
+                <a>联系我们 </a>| 
+                <a>免责声明 </a>| 
+                <a href="#" onclick="help()">使用帮助 </a>
+            </div>
+            <div style="margin-bottom: 2em;">
+               &copy;2020-2020 领队直聘  版权所有
+            </div>
+        </div>
+  </body>
+  <script>
+      var addrs = 'http://localhost:8080/'
+      function goTo(i) {
+          if (i === 1) {
+            window.open(addrs+'home/indexpage', '_self')
+          } else if (i === 3) {
+            
+          } else if (i === 4) {
+            window.open(addrs+'home/help', '_self')
+          }
+      }
+      function reginst() {
+        window.open(addrs+'home/registered', '_self')
+      }
+      function login() {
+        window.open(addrs+'home/login', '_self')
+      }
+      function help() {
+        window.open(addrs+'home/help', '_self')
+      }
+  </script>
+</html>
