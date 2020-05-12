@@ -23,16 +23,19 @@
       <div class="main_content">
         <span class="pub_content">最新发布</span>
         <ul style="margin-top: 3em;">
-          <!-- <li class="pub_news" v-for="(news, i) of news_content" :key="i">
-                <a href="#"><span>{{news.newsTitle}}</span><span class="pub_date">{{news.date}}</span></a>
-              </li> -->
+          <li class="pub_news"
+              @click="goTODetail(i)"
+              v-for="(news, i) of crtpageContent"
+              :key="i">
+            <a href="#"><span>{{news.newsTitle}}</span><span class="pub_date">{{news.date}}</span></a>
+          </li>
         </ul>
         <div class="block">
           <el-pagination @size-change="handleSizeChange"
                          @current-change="handleCurrentChange"
-                         :current-page="currentPage4"
-                         :page-sizes="[10, 20, 30, 40]"
-                         :page-size="10"
+                         :current-page="currentPage"
+                         :page-sizes="pageEve"
+                         :page-size="evePageCount"
                          layout="total, sizes, prev, pager, next, jumper"
                          :total="news_content.length">
           </el-pagination>
@@ -56,29 +59,54 @@ export default {
       ad_left: true,
       ad_right: true,
       news_content: [],
-      currentPage4: 1
+      currentPage: 1,
+      crtpageContent: [],
+      pageEve: [20, 40],
+      evePageCount: 10
+
     }
   },
   methods: {
+    goTODetail (i) {
+      console.info(i)
+      window.open('../../static/stachtml/temple.html')
+    },
     handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
+      this.evePageCount = val
+      this.crtpageContent = []
+      for (let i = (this.currentPage - 1) * this.evePageCount; i < this.evePageCount * this.currentPage; i++) {
+        if (this.news_content[i]) {
+          this.crtpageContent.push(this.news_content[i])
+        }
+      }
     },
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+      this.currentPage = val
+      this.crtpageContent = []
+      for (let i = (this.currentPage - 1) * this.evePageCount; i < this.evePageCount * this.currentPage; i++) {
+        if (this.news_content[i]) {
+          this.crtpageContent.push(this.news_content[i])
+        }
+      }
     },
     getNews () {
-      this.$api.get('./static/mostNews.json', {}, res => {
+      this.$api.get('./static/json/mostNews.json', {}, res => {
         if (res.data.status === 200) {
           this.news_content = res.data.news
+          this.handleSizeChange(10)
+          this.handleCurrentChange(1)
+          if (res.data.news.length > 1000) {
+            this.pageEve.push(100)
+          }
         }
       })
     },
     getCitys () {
-      this.$api.get('./static/citys.json', {
+      this.$api.get('./static/json/citys.json', {
         '参数名': '参数值'
       }, response => {
         if (response.status >= 200 && response.status < 300) {
-          console.log(response.data) // 请求成功，response为成功信息参数
+          //   console.log(response.data) // 请求成功，response为成功信息参数
           this.provinces = response.data.provinces
           for (let i = 0; i < response.data.provinces.length; i++) {
             for (let j = 0; j < response.data.provinces[i].cities.length; j++) {
@@ -88,8 +116,8 @@ export default {
             }
           }
           this.hotCitys.push('其它地区')
-          console.info(this.provinces)
-          console.info(this.hotCitys)
+          //   console.info(this.provinces)
+          //   console.info(this.hotCitys)
         } else {
           console.log(response.message) // 请求失败，response为失败信息
         }
@@ -124,7 +152,7 @@ export default {
     font-size: 1.2em;
   }
   .block {
-    margin-top: 56%;
+    margin-top: 2em;
   }
   .gap_line {
     height: 8em;
@@ -150,6 +178,9 @@ export default {
       }
     }
   }
+  .el-pagination {
+    height: 3em;
+  }
   .ad1 {
     width: 50%;
     // background-color: aqua;
@@ -172,7 +203,6 @@ export default {
     .main_content {
       background-color: yellow;
       width: 55em;
-      height: 33em;
       float: left;
       margin-left: 27.5%;
     }
