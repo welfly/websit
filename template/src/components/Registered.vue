@@ -5,7 +5,7 @@
       <tr>
         <td class="td">所在城市：</td>
         <td>
-          <el-select v-model="optionValue"
+          <el-select v-model="szcs"
                      filterable
                      placeholder="请选择">
             <el-option v-for="item in options"
@@ -16,11 +16,44 @@
           </el-select>
         </td>
       </tr>
+      <tr>
+        <td class="td">主营产品类型：</td>
+        <td>
+          <el-select v-model="zycp"
+                     filterable
+                     placeholder="--请选择--">
+            <el-option v-for="item in zycps"
+                       :key="item.value"
+                       :label="item.label"
+                       :value="item.value">
+            </el-option>
+          </el-select>
+        </td>
+      </tr>
+      <tr class="td">
+        <td>邀请码：</td>
+        <td>
+          <el-input placeholder="请输入邀请码"
+                    v-model="yqm"
+                    clearable>
+          </el-input>
+        </td>
+      </tr>
       <tr class="td">
         <td>登录账户：</td>
         <td>
           <el-input placeholder="请输入登录账户"
-                    v-model="loginVal"
+                    v-model="dlzh"
+                    clearable>
+          </el-input>
+        </td>
+      </tr>
+      <tr class="td"
+          style="display: none;">
+        <td>用户类型</td>
+        <td>
+          <el-input placeholder="用户类型"
+                    v-model="yhlx"
                     clearable>
           </el-input>
         </td>
@@ -29,12 +62,12 @@
         <td>手机号：</td>
         <td>
           <el-input placeholder="请输入手机号"
-                    v-model="phoneVal"
+                    v-model="sjhm"
                     clearable>
           </el-input>
         </td>
       </tr>
-      <tr class="td">
+      <!-- <tr class="td">
         <td>手机验证码：</td>
         <td>
           <el-input placeholder="请输入手机验证码"
@@ -44,12 +77,21 @@
         </td>
         <el-button style="margin-left: 2em;"
                    type="info">获取验证码</el-button>
+      </tr> -->
+      <tr class="td">
+        <td>联系人：</td>
+        <td>
+          <el-input placeholder="请输入联系人"
+                    v-model="lxr"
+                    clearable>
+          </el-input>
+        </td>
       </tr>
       <tr class="td">
         <td>登录密码：</td>
         <td>
           <el-input placeholder="请输入登录密码"
-                    v-model="loginPWDVal"
+                    v-model="pwsword"
                     clearable>
           </el-input>
         </td>
@@ -58,7 +100,7 @@
         <td>确认密码：</td>
         <td>
           <el-input placeholder="请确认密码"
-                    v-model="sureLoginPWDVal"
+                    v-model="cfmPWD"
                     clearable>
           </el-input>
         </td>
@@ -67,7 +109,7 @@
         <td>电子邮箱：</td>
         <td>
           <el-input placeholder="请输入邮箱"
-                    v-model="emailVal"
+                    v-model="dzyx"
                     clearable>
           </el-input>
         </td>
@@ -76,7 +118,7 @@
         <td>联系人：</td>
         <td>
           <el-input placeholder="请输入联系人姓名"
-                    v-model="connectName"
+                    v-model="name"
                     clearable>
           </el-input>
         </td>
@@ -85,7 +127,7 @@
         <td>联系人电话：</td>
         <td>
           <el-input placeholder="请输入联系人电话"
-                    v-model="connectPhnoe"
+                    v-model="lxdh"
                     clearable>
           </el-input>
         </td>
@@ -94,12 +136,12 @@
         <td>联系人地址：</td>
         <td>
           <el-input placeholder="请输入联系人地址"
-                    v-model="connectAddr"
+                    v-model="lxdz"
                     clearable>
           </el-input>
         </td>
       </tr>
-      <tr class="td">
+      <!-- <tr class="td">
         <td>验证码：</td>
         <td>
           <el-input placeholder="请输入验证码"
@@ -107,10 +149,11 @@
                     clearable>
           </el-input>
         </td>
-      </tr>
+      </tr> -->
       <tr class="td">
         <td colspan="2">
-          <el-button type="success">注册会员</el-button>
+          <el-button @click="register"
+                     type="success">注册会员</el-button>
         </td>
       </tr>
       <tr class="td">
@@ -467,22 +510,79 @@ export default {
         { value: '213', label: 'Z张家口' },
         { value: '241', label: 'Z镇江' }
       ],
-      optionValue: '',
-      loginVal: '',
-      phoneVal: '',
-      checkPhoneCode: '',
-      loginPWDVal: '',
-      sureLoginPWDVal: '',
-      emailVal: '',
-      connectName: '',
-      connectPhnoe: '',
-      connectAddr: '',
-      staticCode: ''
+      zycps: [
+        { value: 'KTV', label: 'KTV' },
+        { value: '夜店', label: '夜店' },
+        { value: '酒吧', label: '酒吧' }
+      ],
+      szcs: '', // 所在城市
+      dlzh: '', // 登录账号
+      sjhm: '', // 手机号码
+      //   checkPhoneCode: '',
+      cfmPWD: '', // 确认登录密码
+      pwsword: '', // 登录密码
+      dzyx: '', // 电子邮箱
+      name: '', // 登录名
+      lxdz: '', // 联系地址
+      //   staticCode: '',
+      lxr: '', // 联系人
+      lxdh: '', // 联系电话
+      mrxfcs: 1, // 每日限发次数
+      zdfp: 1, // 自动发布标志
+      fbsj: '', // 发布时间
+      hylx: '普通会员', // 会员类型
+      yhlx: '普通会员', // 用户类型
+      yqm: '',
+      zycp: 'KTV' // 主营产品
     }
   },
   methods: {
     login () {
       this.$router.push({ path: '/home/login' })
+    },
+    register () {
+      let szcs = this.szcs
+      let dlzh = this.dlzh
+      let sjhm = this.sjhm
+      let cfmPWD = this.cfmPWD
+      let pwsword = this.pwsword
+      let dzyx = this.dzyx
+      let name = this.name
+      let lxdz = this.lxdz
+      let lxr = this.lxr
+      let lxdh = this.lxdh
+      let mrxfcs = this.mrxfcs
+      let zdfp = this.zdfp
+      let hylx = this.hylx
+      let yhlx = this.yhlx
+      let yqm = this.yqm
+      let zycp = this.zycp
+      console.info(yqm)
+      this.$api.post('http://localhost/cyx/user/save',
+        {
+          szcs,
+          dlzh,
+          sjhm,
+          cfmPWD,
+          pwsword,
+          dzyx,
+          name,
+          lxdz,
+          lxr,
+          lxdh,
+          mrxfcs,
+          zdfp,
+          hylx,
+          yhlx,
+          yqm,
+          zycp
+        }, res => {
+          if (res.status === 200) {
+            alert('注册成功！')
+          } else {
+            alert('服务器开小差了@_@!')
+          }
+        })
     }
   }
 }

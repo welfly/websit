@@ -6,28 +6,34 @@
       <ul class="citysCss">
         <li class="cityCss"
             v-for="hotCity of hotCitys"
+            @click=""
             :key="hotCity">{{hotCity}}</li>
       </ul>
     </div>
     <div>
-      <div class="ad1"></div>
-      <div class="ad1"></div>
-      <div class="ad1"></div>
-      <div class="ad1"></div>
+      <a href="#"><img style="margin-bottom: .5em;"
+             src="../../static/img/1.jpg"></a>
+      <a href="#"><img style="margin-bottom: .5em;"
+             src="../../static/img/2.jpg"></a>
+      <a href="#"><img style="margin-bottom: .5em;"
+             src="../../static/img/3.jpg"></a>
+      <a href="#"><img style="margin-bottom: .5em;"
+             src="../../static/img/4.jpg"></a>
     </div>
     <div class="ad_main">
-      <div class="ad_left"
+      <!-- <div class="ad_left"
            v-show="ad_left">
         <span @click="cls_left(1)">关闭</span>
-      </div>
+      </div> -->
       <div class="main_content">
         <span class="pub_content">最新发布</span>
         <ul style="margin-top: 3em;">
           <li class="pub_news"
-              @click="goTODetail(i)"
               v-for="(news, i) of crtpageContent"
+              @click="goTODetail(news.id)"
               :key="i">
-            <a href="#"><span>{{news.newsTitle}}</span><span class="pub_date">{{news.date}}</span></a>
+            <a href='#'>
+              <span>{{news.bt}}</span><span class="pub_date">{{news.fpsf}}省 {{news.fpcs}} {{news.fbqx}}</span></a>
           </li>
         </ul>
         <div class="block">
@@ -41,9 +47,23 @@
           </el-pagination>
         </div>
       </div>
-      <div class="ad_right"
+      <!-- <div class="ad_right"
            v-show="ad_right">
         <span @click="cls_left(2)">关闭</span>
+      </div> -->
+      <div style="height: 26em;
+            width: 12.8em;
+            float: left;
+            margin-left: 1em;">
+        <a href="#"><img style="width: 12.8em;"
+               src="../../static/img/5.jpg"></a>
+        <a href="#"><img style="width: 12.8em; margin-top: 7px;"
+               src="../../static/img/6.jpg"></a>
+        <a href="#"><img style="width: 12.8em; margin-top: 7px;"
+               src="../../static/img/6.jpg"></a>
+        <a href="javascript:window.scrollTo(0,0)"
+           style="position: fixed; bottom: 2em; background-color: wheat; width: 5em; height: 5em; line-height: 5em;"
+           title="回到顶端">回到顶端</a>
       </div>
     </div>
   </div>
@@ -61,15 +81,14 @@ export default {
       news_content: [],
       currentPage: 1,
       crtpageContent: [],
-      pageEve: [20, 40],
-      evePageCount: 10
+      pageEve: [30, 70],
+      evePageCount: 30
 
     }
   },
   methods: {
     goTODetail (i) {
-      console.info(i)
-      window.open('../../static/stachtml/temple.html')
+      window.open('http://192.168.30.165/upload/' + i + '.html')
     },
     handleSizeChange (val) {
       this.evePageCount = val
@@ -90,12 +109,16 @@ export default {
       }
     },
     getNews () {
-      this.$api.get('./static/json/mostNews.json', {}, res => {
-        if (res.data.status === 200) {
-          this.news_content = res.data.news
-          this.handleSizeChange(10)
+      let pageNum = 1
+      let limit = 20
+      this.$api.post('http://localhost/cyx/wz/getWzPage', { pageNum, limit }, res => {
+        console.info(res)
+        if (res.status === 200) {
+          console.info('asdfasdf')
+          this.news_content = res.data.data
+          this.handleSizeChange(30)
           this.handleCurrentChange(1)
-          if (res.data.news.length > 1000) {
+          if (res.data.data.length > 1000) {
             this.pageEve.push(100)
           }
         }
@@ -139,8 +162,8 @@ export default {
 </script>
 <style lang="less" scoped>
 .hotcityContent {
-  height: 8em;
-  line-height: 8em;
+  height: 1em;
+  line-height: 2em;
   margin: 3px 0;
   .hotCity {
     margin: 0 auto;
@@ -183,7 +206,6 @@ export default {
   }
   .ad1 {
     width: 50%;
-    // background-color: aqua;
     height: 8em;
     float: left;
     border: 1px solid black;
@@ -191,7 +213,7 @@ export default {
   .ad_main {
     // height: 40em;
     // background-color: green;
-    float: left;
+    // float: left;
     .ad_left {
       width: 13em;
       height: 25em;
@@ -204,7 +226,7 @@ export default {
       background-color: yellow;
       width: 55em;
       float: left;
-      margin-left: 27.5%;
+      margin-left: 9.6%;
     }
     .ad_right {
       width: 13em;
@@ -219,7 +241,7 @@ export default {
     .pub_content {
       float: left;
       margin-left: 2em;
-      margin-top: -2.5em;
+      //   margin-top: -2.5em;
       color: red;
       height: 1em;
     }

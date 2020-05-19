@@ -21,7 +21,8 @@
     </tr>
     <tr style=" width: 13em;  line-height: 3.3em;">
       <td colspan="2">
-        <el-button type="success">会员登录</el-button>
+        <el-button @click="login()"
+                   type="success">会员登录</el-button>
       </td>
     </tr>
     <tr class="td">
@@ -43,6 +44,24 @@ export default {
   methods: {
     registered () {
       this.$router.push({ path: '/home/registered' })
+    },
+    login () {
+      let name = this.loginVal
+      let pwsword = this.loginPWDVal
+      this.$api.post('http://localhost/cyx/user/loginqt',
+        {
+          name, pwsword
+        }, res => {
+          if (res.status === 200) {
+            alert('登录成功！')
+            console.info(res)
+            sessionStorage.setItem('userMsg', JSON.stringify(res.data))
+            sessionStorage.setItem('isLogin', '0')
+          } else {
+            alert('服务器开小差了@_@!')
+            sessionStorage.setItem('isLogin', '1')
+          }
+        })
     }
   }
 

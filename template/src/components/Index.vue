@@ -9,7 +9,7 @@
           Tel: 188-8888-8888
         </span>
         <span class="login"
-              v-if="!isLogin">
+              v-if="isLogin == '1' ">
           <a href="#"
              @click="registered()">注册</a> |
           <a href="#"
@@ -78,8 +78,8 @@ export default {
       year: '',
       month: '',
       day: '',
-      isLogin: true,
-      userName: '测试微博'
+      isLogin: sessionStorage.getItem('isLogin') ? sessionStorage.getItem('isLogin') : '1',
+      userName: JSON.parse(sessionStorage.getItem('userMsg')) ? JSON.parse(sessionStorage.getItem('userMsg')).name : 'null'
     }
   },
   methods: {
@@ -87,10 +87,10 @@ export default {
       this.$router.push({ path: '/home/usercenter' })
     },
     userLoginOut () {
-      this.isLogin = false
+      this.isLogin = '1'
     },
     judgeIsLogin () {
-      this.isLogin = true
+      this.isLogin = '0'
     },
     getSysTime () {
       let date = new Date()
@@ -121,6 +121,7 @@ export default {
 
   mounted () {
     this.getSysTime()
+    console.info(this.isLogin, this.userName)
   }
 
 }
