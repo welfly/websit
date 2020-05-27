@@ -90,7 +90,8 @@
       <tr class="td">
         <td>登录密码：</td>
         <td>
-          <el-input placeholder="请输入登录密码"
+          <el-input type="password"
+                    placeholder="请输入登录密码"
                     v-model="pwsword"
                     clearable>
           </el-input>
@@ -99,7 +100,8 @@
       <tr class="td">
         <td>确认密码：</td>
         <td>
-          <el-input placeholder="请确认密码"
+          <el-input type="password"
+                    placeholder="请确认密码"
                     v-model="cfmPWD"
                     clearable>
           </el-input>

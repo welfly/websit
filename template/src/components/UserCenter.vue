@@ -90,6 +90,7 @@
               <td>
                 <el-input placeholder="请输入原密码"
                           v-model="oldPwd"
+                          type="password"
                           clearable>
                 </el-input>
               </td>
@@ -97,7 +98,8 @@
             <tr class="td">
               <td>新密码：</td>
               <td>
-                <el-input placeholder="请输入新密码"
+                <el-input type="password"
+                          placeholder="请输入新密码"
                           v-model="newPWD"
                           clearable>
                 </el-input>
@@ -108,13 +110,14 @@
               <td>
                 <el-input placeholder="请确认新密码"
                           v-model="newPWDcfm"
+                          type="password"
                           clearable>
                 </el-input>
               </td>
             </tr>
             <tr style=" width: 13em; line-height: 3.3em; text-align: center;">
               <td colspan="2">
-                <el-button @click="ch"
+                <el-button @click="changePWD"
                            type="success">修改密码</el-button>
               </td>
             </tr>
@@ -749,7 +752,23 @@ export default {
       console.log(key, keyPath)
     },
     changePWD () {
-
+      if (this.newPWD !== this.newPWDcfm) {
+        alert('两次输入的密码不一致')
+        return
+      }
+      let oldPwd = this.oldPwd
+      let newPWD = this.newPWD
+      this.$api.post('http://localhost/cyx//user/update',
+        {
+          oldPwd, newPWD
+        }, res => {
+          if (res.data !== -1) {
+            alert(res.data)
+          } else {
+            alert('服务器开小差了@_@!')
+            sessionStorage.setItem('isLogin', '1')
+          }
+        })
     },
     pubHandleClick (row) {
       console.log(row)

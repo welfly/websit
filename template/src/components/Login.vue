@@ -13,7 +13,8 @@
     <tr class="td">
       <td>登录密码：</td>
       <td>
-        <el-input placeholder="请输入登录密码"
+        <el-input type="password"
+                  placeholder="请输入登录密码"
                   v-model="loginPWDVal"
                   clearable>
         </el-input>
@@ -52,13 +53,16 @@ export default {
         {
           name, pwsword
         }, res => {
-          if (res.status === 200) {
-            alert('登录成功！')
-            console.info(res)
-            sessionStorage.setItem('userMsg', JSON.stringify(res.data))
+          if (res && res.data !== -1) {
+            let uname = res.data.name + ''
+            sessionStorage.setItem('userMsg', uname)
             sessionStorage.setItem('isLogin', '0')
+            let isL = sessionStorage.setItem('isLogin', '0')
+            this.$emit('toPar', isL)
+            this.$router.push({ path: '/home/usercenter' })
+            alert('登录成功！')
           } else {
-            alert('服务器开小差了@_@!')
+            alert('用户名或密码错误！')
             sessionStorage.setItem('isLogin', '1')
           }
         })

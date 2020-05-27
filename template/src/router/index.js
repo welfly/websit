@@ -18,7 +18,10 @@ export default new Router({
         },
         {
           path: 'freepublish',
-          component: resolve => require(['@/components/FreePublish'], resolve)
+          component: resolve => require(['@/components/FreePublish'], resolve),
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: 'registered',
@@ -34,7 +37,10 @@ export default new Router({
         },
         {
           path: 'usercenter',
-          component: resolve => require(['@/components/UserCenter'], resolve)
+          component: resolve => require(['@/components/UserCenter'], resolve),
+          meta: {
+            requiresAuth: true
+          }
         }
       ]
     }

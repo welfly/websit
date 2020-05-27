@@ -6,10 +6,34 @@
       <ul class="citysCss">
         <li class="cityCss"
             v-for="hotCity of hotCitys"
-            @click=""
+            @click="getNews()"
             :key="hotCity">{{hotCity}}</li>
+        <li @click="getOthers"
+            class="cityCss hotCityOthcss">其它地区</li>
       </ul>
     </div>
+    <el-drawer :visible.sync="drawer"
+               :with-header="false">
+      <span>
+        <div>请选择区域</div>
+        <div>
+          <el-select v-model="selValue"
+                     @change="getSec()"
+                     filterable
+                     placeholder="请选择 / 搜索区域">
+            <el-option-group v-for="secOption in secOptions"
+                             :key="secOption.code"
+                             :label="secOption.name">
+              <el-option v-for="item in secOption.cities"
+                         :key="item.code"
+                         :label="item.name"
+                         :value="item.name">
+              </el-option>
+            </el-option-group>
+          </el-select>
+        </div>
+      </span>
+    </el-drawer>
     <div>
       <a href="#"><img style="margin-bottom: .5em;"
              src="../../static/img/1.jpg"></a>
@@ -82,13 +106,21 @@ export default {
       currentPage: 1,
       crtpageContent: [],
       pageEve: [30, 70],
-      evePageCount: 30
+      evePageCount: 30,
+      drawer: false,
+      secOptions: [],
+      selValue: ''
 
     }
   },
   methods: {
+    getSec () {
+    },
+    getOthers () {
+      this.drawer = !this.drawer
+    },
     goTODetail (i) {
-      window.open('http://192.168.30.165/upload/' + i + '.html')
+      window.open('http://118.25.137.189/wz/' + i + '.html')
     },
     handleSizeChange (val) {
       this.evePageCount = val
@@ -112,9 +144,7 @@ export default {
       let pageNum = 1
       let limit = 20
       this.$api.post('http://localhost/cyx/wz/getWzPage', { pageNum, limit }, res => {
-        console.info(res)
         if (res.status === 200) {
-          console.info('asdfasdf')
           this.news_content = res.data.data
           this.handleSizeChange(30)
           this.handleCurrentChange(1)
@@ -132,13 +162,15 @@ export default {
           //   console.log(response.data) // 请求成功，response为成功信息参数
           this.provinces = response.data.provinces
           for (let i = 0; i < response.data.provinces.length; i++) {
+            if (response.data.provinces[i].level === '1') {
+              this.secOptions.push(response.data.provinces[i])
+            }
             for (let j = 0; j < response.data.provinces[i].cities.length; j++) {
               if (response.data.provinces[i].cities[j].level === '1' || response.data.provinces[i].cities[j].level === '2') {
                 this.hotCitys.push(response.data.provinces[i].cities[j].name)
               }
             }
           }
-          this.hotCitys.push('其它地区')
           //   console.info(this.provinces)
           //   console.info(this.hotCitys)
         } else {
@@ -162,6 +194,13 @@ export default {
 </script>
 <style lang="less" scoped>
 .hotcityContent {
+  .hotCityOthcss {
+    background-color: brown;
+    color: white;
+    &:hover {
+      color: black;
+    }
+  }
   height: 1em;
   line-height: 2em;
   margin: 3px 0;

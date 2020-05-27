@@ -9,7 +9,7 @@
           Tel: 188-8888-8888
         </span>
         <span class="login"
-              v-if="isLogin == '1' ">
+              v-if=" isLogin == '1' ">
           <a href="#"
              @click="registered()">注册</a> |
           <a href="#"
@@ -78,8 +78,8 @@ export default {
       year: '',
       month: '',
       day: '',
-      isLogin: sessionStorage.getItem('isLogin') ? sessionStorage.getItem('isLogin') : '1',
-      userName: JSON.parse(sessionStorage.getItem('userMsg')) ? JSON.parse(sessionStorage.getItem('userMsg')).name : 'null'
+      isLogin: '1',
+      userName: (sessionStorage.getItem('userMsg')) ? (sessionStorage.getItem('userMsg')).name : 'null'
     }
   },
   methods: {
@@ -87,10 +87,10 @@ export default {
       this.$router.push({ path: '/home/usercenter' })
     },
     userLoginOut () {
+      sessionStorage.setItem('userMsg', {})
+      sessionStorage.setItem('isLogin', '1')
       this.isLogin = '1'
-    },
-    judgeIsLogin () {
-      this.isLogin = '0'
+      this.$router.push({ path: '/home/indexpage' })
     },
     getSysTime () {
       let date = new Date()
@@ -102,7 +102,13 @@ export default {
       if (i === 1) {
         this.$router.push({ path: '/home/indexpage' })
       } else if (i === 2) {
-        window.open(`../../static/stachtml/temple.html`, '_self')
+        let isLog = sessionStorage.getItem('isLogin')
+        if (isLog === '1') {
+          alert('您还未登录，请登录')
+          this.$router.push({ path: '/home/login' })
+        } else {
+          this.$router.push({ path: '/home/freepublish' })
+        }
       } else if (i === 3) {
       } else {
         this.$router.push({ path: '/home/help' })
@@ -118,10 +124,11 @@ export default {
       this.$router.push({ path: '/home/help' })
     }
   },
-
+  beforeUpdate () {
+    this.isLogin = (sessionStorage.getItem('isLogin'))
+  },
   mounted () {
     this.getSysTime()
-    console.info(this.isLogin, this.userName)
   }
 
 }
