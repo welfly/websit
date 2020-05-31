@@ -4,32 +4,34 @@
     <tr class="td">
       <td>登录账户：</td>
       <td>
-        <el-input placeholder="请输入登录账户"
-                  v-model="loginVal"
-                  clearable>
-        </el-input>
+        <el-input
+          v-model="loginVal"
+          placeholder="请输入登录账户"
+          clearable/>
       </td>
     </tr>
     <tr class="td">
       <td>登录密码：</td>
       <td>
-        <el-input type="password"
-                  placeholder="请输入登录密码"
-                  v-model="loginPWDVal"
-                  clearable>
-        </el-input>
+        <el-input
+          v-model="loginPWDVal"
+          type="password"
+          placeholder="请输入登录密码"
+          clearable/>
       </td>
     </tr>
     <tr style=" width: 13em;  line-height: 3.3em;">
       <td colspan="2">
-        <el-button @click="login()"
-                   type="success">会员登录</el-button>
+        <el-button
+          type="success"
+          @click="login()">会员登录</el-button>
       </td>
     </tr>
     <tr class="td">
       <td colspan="2">
-        <span>如您没有账号， <a href="#"
-             @click="registered()">点此注册！</a></span>
+        <span>如您没有账号， <a
+          href="#"
+          @click="registered()">点此注册！</a></span>
       </td>
     </tr>
   </div>
@@ -47,17 +49,20 @@ export default {
       this.$router.push({ path: '/home/registered' })
     },
     login () {
-      let name = this.loginVal
-      let pwsword = this.loginPWDVal
-      this.$api.post('http://localhost/cyx/user/loginqt',
+      const name = this.loginVal
+      const pwsword = this.loginPWDVal
+      this.$api.post('http://118.25.137.189/admin/user/loginqt',
         {
           name, pwsword
         }, res => {
           if (res && res.data !== -1) {
-            let uname = res.data.name + ''
+            const uname = res.data.name + ''
+            console.info(uname)
             sessionStorage.setItem('userMsg', uname)
             sessionStorage.setItem('isLogin', '0')
-            let isL = sessionStorage.setItem('isLogin', '0')
+            sessionStorage.setItem('id', res.data.id)
+
+            const isL = sessionStorage.setItem('isLogin', '0')
             this.$emit('toPar', isL)
             this.$router.push({ path: '/home/usercenter' })
             alert('登录成功！')

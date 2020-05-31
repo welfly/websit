@@ -3,149 +3,135 @@
     <table style=" margin-left: 5em;">
       <tr>
         <td class="td">发布省份：</td>
-        <td>
-          <el-select v-model="fpsf"
-                     filterable
-                     size='medium'
-                     @change="getCt(fpsf)"
-                     @blur="cls"
-                     placeholder="请选择发布省份">
-            <el-option v-for="item in provinces"
-                       :key="item.code"
-                       :label="item.name"
-                       :value="item.name">
-            </el-option>
+        <td style="    text-align: left;">
+          <el-select
+            v-model="fpsf"
+            filterable
+            size="medium"
+            placeholder="请选择发布省份"
+            @change="getCt(fpsf)"
+            @blur="cls">
+            <el-option
+              v-for="item in provinces"
+              :key="item.code"
+              :label="item.name"
+              :value="item.name"/>
           </el-select>
         </td>
       </tr>
       <tr>
         <td class="td">发布城市：</td>
-        <td>
-          <el-select v-model="fpcs"
-                     filterable
-                     placeholder="--请选择--">
-            <el-option v-for="item in cts"
-                       :key="item.code"
-                       :label="item.name"
-                       :value="item.name">
-            </el-option>
+        <td style="    text-align: left;">
+          <el-select
+            v-model="fpcs"
+            filterable
+            placeholder="--请选择--">
+            <el-option
+              v-for="item in cts"
+              :key="item.code"
+              :label="item.name"
+              :value="item.name"/>
           </el-select>
         </td>
       </tr>
       <tr>
         <td class="td">信息类型：</td>
-        <td>
-          <el-select v-model="xxlx"
-                     filterable
-                     placeholder="--请选择--">
-            <el-option v-for="item in xxlxs"
-                       :key="item"
-                       :label="item"
-                       :value="item">
-            </el-option>
+        <td style="    text-align: left;">
+          <el-select
+            v-model="xxlx"
+            filterable
+            placeholder="--请选择--">
+            <el-option
+              v-for="item in xxlxs"
+              :key="item"
+              :label="item"
+              :value="item"/>
           </el-select>
         </td>
       </tr>
       <tr class="td">
         <td>标题：</td>
-        <td>
-          <el-input placeholder="请输入标题"
-                    v-model="bt"
-                    clearable>
-          </el-input>
+        <td >
+          <el-input
+            v-model="bt"
+            placeholder="请输入标题"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>标签：</td>
         <td>
-          <el-input placeholder="请输入标签"
-                    v-model="bq"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="bq"
+            placeholder="请输入标签"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>内容：</td>
-        <td>
-          <el-input type="textarea"
-                    placeholder="请输入招聘内容"
-                    v-model="nr"
-                    clearable>
-          </el-input>
-        </td>
-      </tr>
-      <tr class="td">
-        <td>图片：</td>
-        <td>
-          <el-upload class="upload-demo load-dragger"
-                     drag
-                     action="http://localhost/cyx/tp/upload"
-                     :on-success="upTP">
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__tip"
-                 slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-          </el-upload>
+        <td style="width: 50em">
+          <EditorBox ele-id="EditorBox" @editorContent="getContent"/>
         </td>
       </tr>
       <tr class="td">
         <td>企业名称：</td>
         <td>
-          <el-input placeholder="请输入企业名称"
-                    v-model="qymc"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="qymc"
+            placeholder="请输入企业名称"
+            clearable/>
         </td>
       </tr>
 
       <tr class="td">
         <td>联系人：</td>
         <td>
-          <el-input placeholder="请输入招聘联系人"
-                    v-model="lxr"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="lxr"
+            placeholder="请输入招聘联系人"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>联系人电话：</td>
         <td>
-          <el-input placeholder="请输入招聘联系人电话"
-                    v-model="lxdh"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="lxdh"
+            placeholder="请输入招聘联系人电话"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>审核标志：</td>
         <td>
-          <el-input v-model="shbz"
-                    disabled>
-          </el-input>
+          <el-input
+            v-model="shbz"
+            disabled/>
         </td>
       </tr>
       <tr class="td">
         <td>发布区县：</td>
         <td>
-          <el-input placeholder="请输入招聘区县"
-                    v-model="fbqx"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="fbqx"
+            placeholder="请输入招聘区县"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>发布地址：</td>
         <td>
-          <el-input placeholder="请输入招聘地址"
-                    v-model="fpdz"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="fpdz"
+            placeholder="请输入招聘地址"
+            clearable/>
         </td>
       </tr>
       <tr style=" width: 13em;  line-height: 3.3em;">
         <td colspan="2">
-          <el-button @click="subData()"
-                     type="success">发布信息</el-button>
+          <el-button
+            type="success"
+            @click="subData()">发布信息</el-button>
         </td>
       </tr>
     </table>
@@ -153,10 +139,18 @@
 </template>
 
 <script>
+import EditorBox from './Editor'
 export default {
   name: 'FreePublish',
+  components: {
+    EditorBox
+  },
   data () {
     return {
+      uploadImgForm: {
+        file: {},
+        name: ''
+      },
       provinces: [],
       fpsf: '',
       fpcs: '',
@@ -175,7 +169,14 @@ export default {
       fpdz: ''
     }
   },
+  mounted () {
+    this.getCitys()
+  },
   methods: {
+
+    getContent (data) {
+      this.nr = data
+    },
     cls () {
       this.fpcs = ''
     },
@@ -200,21 +201,66 @@ export default {
       })
     },
     subData () {
-      // admin/wz/saveWz
-      let fpsf = this.fpsf
-      let fpcs = this.fpcs
-      let xxlx = this.xxlx
-      let bt = this.bt
-      let bq = this.bq
-      let nr = this.nr
-      let tp = this.tp
-      let qymc = this.qymc
-      let lxr = this.lxr
-      let lxdh = this.lxdh
-      let shbz = this.shbz
-      let fbqx = this.fbqx
-      let fpdz = this.fpdz
-      this.$api.post('http://localhost/cyx/wz/saveWz',
+    // admin/wz/saveWz
+      const fpsf = this.fpsf
+      if (fpsf === '') {
+        alert('未选择发布省份！！')
+        return
+      }
+      const fpcs = this.fpcs
+      if (fpcs === '') {
+        alert('未选择发布城市！！')
+        return
+      }
+      const xxlx = this.xxlx
+      if (xxlx === '') {
+        alert('未选择信息类型！！')
+        return
+      }
+      const bt = this.bt
+      if (bt === '') {
+        alert('未填写标题！！')
+        return
+      }
+      const bq = this.bq
+      if (bt === '') {
+        alert('未填写标签！！')
+        return
+      }
+      const nr = this.nr
+      const tp = this.tp
+
+      const qymc = this.qymc
+      if (qymc === '') {
+        alert('未填写企业名称！！')
+        return
+      }
+      const lxr = this.lxr
+      if (lxr === '') {
+        alert('未填写联系人！！')
+        return
+      }
+      const lxdh = this.lxdh
+      if (lxdh === '') {
+        alert('未填写联系电话！！')
+        return
+      }
+      const shbz = this.shbz
+      const fbqx = this.fbqx
+      if (fbqx === '') {
+        alert('未填写发布区县！！')
+        return
+      }
+      const fpdz = this.fpdz
+      if (fpdz === '') {
+        alert('未填写发布地址！！')
+        return
+      }
+      if (nr === '') {
+        alert('未填写任何发布内容！！')
+        return
+      }
+      this.$api.post('http://118.25.137.189/admin/wz/saveWz',
         {
           fpsf, fpcs, xxlx, bt, bq, nr, tp, qymc, lxr, lxdh, shbz, fbqx, fpdz
         }, res => {
@@ -228,11 +274,7 @@ export default {
     upTP (res) {
       this.tp = res.data.src
     }
-  },
-  mounted () {
-    this.getCitys()
-  }
-}
+  }}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

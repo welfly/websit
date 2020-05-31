@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="content">
-        <div class="mq"></div>
+        <div class="mq"/>
         <div class="aboutsp">
           <div class="col1">
             <div class="anav">
@@ -13,8 +13,8 @@
               </ul>
             </div>
           </div>
-          <div v-if="showID == 1"></div>
-          <div v-else-if="showID == 2"></div>
+          <div v-if="showID == 1"/>
+          <div v-else-if="showID == 2"/>
           <div v-else-if="showID == 3">
             <div class="col2">
               <div class="subheader">
@@ -28,11 +28,11 @@
                   <span style="color:#009900;font-family:monospace;font-size:18px;">
                     <strong>领队在线网-领队招聘网（www.lingdui.com）是中国领队求职招聘第一网站，涵盖KTV招聘、酒吧招聘、夜总会招聘、夜店招聘、酒店招聘等各方面。自成立以来，我们一直致力于做好全国领队人才招聘的向导，并且就不断为实现这个目标而努力。</strong>
                   </span>
-                  <span style="font-size:18px;color:#009900;"><strong></strong></span>
+                  <span style="font-size:18px;color:#009900;"><strong/></span>
                 </p>
                 <p>
                   <span style="color:#009900;font-family:monospace;font-size:18px;"><strong><br>
-                    </strong></span>
+                  </strong></span>
                 </p>
                 <p>
                   <br>
@@ -52,8 +52,7 @@
                 <div style="color:#009900;font-family:monospace;font-size:18px;font-weight:bold;text-align:center;">
                   <strong><span style="color:#337FE5;">若您的信息被<span style="color:#E53333;">拒绝审核</span>或<span style="color:#E53333;">删除</span>，肯定是因为违反了如下规则，敬请认真阅读！</span></strong>
                 </div>
-                <div style="text-align:center;">
-                </div>
+                <div style="text-align:center;"/>
                 <b>
                   <div style="text-align:center;">
                     <b><span style="color:#337FE5;"><span style="font-size:18px;">领队在线网为</span><span style="color:#E53333;font-size:18px;">网警备案单位</span><span style="font-size:18px;">，我们将</span><span style="color:#E53333;font-size:18px;">严格执行网警要求</span><span style="font-size:18px;">的去运营网站！</span></span></b>
@@ -111,8 +110,8 @@
               </div>
             </div>
           </div>
-          <div v-else></div>
-          <div class="clear"></div>
+          <div v-else/>
+          <div class="clear"/>
         </div>
       </div>
     </div>

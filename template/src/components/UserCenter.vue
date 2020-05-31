@@ -4,10 +4,11 @@
       <el-row class="tac">
         <el-col :span="12">
           <h5 style="padding: 1em; color: black;">用户中心</h5>
-          <el-menu default-active="2"
-                   class="el-menu-vertical-demo"
-                   @open="handleOpen"
-                   @close="handleClose">
+          <el-menu
+            default-active="2"
+            class="el-menu-vertical-demo"
+            @open="handleOpen"
+            @close="handleClose">
             <!-- <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-location"></i>
@@ -20,56 +21,65 @@
                 <el-menu-item index="1-4">选项4</el-menu-item>
               </el-menu-item-group>
             </el-submenu> -->
-            <el-menu-item index="1"
-                          @click="menuCli(1)">
-              <i class="el-icon-location"></i>
+            <el-menu-item
+              index="1"
+              @click="menuCli(1)">
+              <i class="el-icon-location"/>
               <span slot="title">用户首页</span>
             </el-menu-item>
             <el-submenu index="2">
               <template slot="title">
-                <i class="el-icon-setting"></i>
+                <i class="el-icon-setting"/>
                 <span>账号管理</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="2-1"
-                              @click="menuCli(21)">修改我的资料</el-menu-item>
-                <el-menu-item index="2-2"
-                              @click="menuCli(22)">修改密码</el-menu-item>
+                <el-menu-item
+                  index="2-1"
+                  @click="menuCli(21)">修改我的资料</el-menu-item>
+                <el-menu-item
+                  index="2-2"
+                  @click="menuCli(22)">修改密码</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="3">
               <template slot="title">
-                <i class="el-icon-document"></i>
+                <i class="el-icon-document"/>
                 <span>管理我的信息</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="3-1"
-                              @click="menuCli(31)">发布信息</el-menu-item>
+                <el-menu-item
+                  index="3-1"
+                  @click="menuCli(31)">发布信息</el-menu-item>
                 <el-submenu index="3-2">
                   <template slot="title">
                     <span>管理我的信息</span>
                   </template>
                   <el-menu-item-group>
-                    <el-menu-item index="3-2-1"
-                                  @click="menuCli(321)">已发布</el-menu-item>
-                    <el-menu-item index="3-2-2"
-                                  @click="menuCli(322)">待审核</el-menu-item>
+                    <el-menu-item
+                      index="3-2-1"
+                      @click="menuCli(321)">已发布</el-menu-item>
+                    <el-menu-item
+                      index="3-2-2"
+                      @click="menuCli(322)">待审核</el-menu-item>
                   </el-menu-item-group>
                 </el-submenu>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="4">
               <template slot="title">
-                <i class="el-icon-menu"></i>
+                <i class="el-icon-menu"/>
                 <span>客户服务</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="4-1"
-                              @click="menuCli(41)">联系客服</el-menu-item>
-                <el-menu-item index="4-2"
-                              @click="menuCli(42)">使用帮助</el-menu-item>
-                <el-menu-item index="4-3"
-                              @click="menuCli(43)">免责声明</el-menu-item>
+                <el-menu-item
+                  index="4-1"
+                  @click="menuCli(41)">联系客服</el-menu-item>
+                <el-menu-item
+                  index="4-2"
+                  @click="menuCli(42)">使用帮助</el-menu-item>
+                <el-menu-item
+                  index="4-3"
+                  @click="menuCli(43)">免责声明</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
           </el-menu>
@@ -77,10 +87,10 @@
         <div class="pane_r">
           <div v-if="show === 1">
             <div>
-              您当前是<span class="odUser">普通用户</span>：您每天可以发布 1 条信息，今日已发布<span class="odU"> {{odU}} </span>条，还可以发布<span class="odU"> {{1-odU}} </span>条
+              您当前是<span class="odUser">普通用户</span>：您每天可以发布 1 条信息，今日已发布<span class="odU"> {{ odU }} </span>条，还可以发布<span class="odU"> {{ 1-odU }} </span>条
             </div>
             <div>
-              您当前是<span class="odUser">VIP会员</span>：您每天可以发布 100 条信息，今日已发布<span class="odU"> {{odU}} </span>条，还可以发布<span class="odU"> {{100-odU}} </span>条
+              您当前是<span class="odUser">VIP会员</span>：您每天可以发布 100 条信息，今日已发布<span class="odU"> {{ odU }} </span>条，还可以发布<span class="odU"> {{ 100-odU }} </span>条
             </div>
           </div>
 
@@ -88,37 +98,38 @@
             <tr class="td">
               <td>原密码：</td>
               <td>
-                <el-input placeholder="请输入原密码"
-                          v-model="oldPwd"
-                          type="password"
-                          clearable>
-                </el-input>
+                <el-input
+                  v-model="oldPwd"
+                  placeholder="请输入原密码"
+                  type="password"
+                  clearable/>
               </td>
             </tr>
             <tr class="td">
               <td>新密码：</td>
               <td>
-                <el-input type="password"
-                          placeholder="请输入新密码"
-                          v-model="newPWD"
-                          clearable>
-                </el-input>
+                <el-input
+                  v-model="newPWD"
+                  type="password"
+                  placeholder="请输入新密码"
+                  clearable/>
               </td>
             </tr>
             <tr class="td">
               <td>确认新密码：</td>
               <td>
-                <el-input placeholder="请确认新密码"
-                          v-model="newPWDcfm"
-                          type="password"
-                          clearable>
-                </el-input>
+                <el-input
+                  v-model="newPWDcfm"
+                  placeholder="请确认新密码"
+                  type="password"
+                  clearable/>
               </td>
             </tr>
             <tr style=" width: 13em; line-height: 3.3em; text-align: center;">
               <td colspan="2">
-                <el-button @click="changePWD"
-                           type="success">修改密码</el-button>
+                <el-button
+                  type="success"
+                  @click="changePWD">修改密码</el-button>
               </td>
             </tr>
           </div>
@@ -128,69 +139,70 @@
               <tr>
                 <td class="td">所在城市：</td>
                 <td>
-                  <el-select v-model="optionValue"
-                             filterable
-                             placeholder="请选择">
-                    <el-option v-for="item in options"
-                               :key="item.value"
-                               :label="item.label"
-                               :value="item.value">
-                    </el-option>
+                  <el-select
+                    v-model="optionValue"
+                    filterable
+                    placeholder="请选择">
+                    <el-option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"/>
                   </el-select>
                 </td>
               </tr>
               <tr class="td">
                 <td>用户名：</td>
                 <td>
-                  <el-input disabled
-                            v-model="loginVal"
-                            clearable>
-                  </el-input>
+                  <el-input
+                    v-model="loginVal"
+                    disabled
+                    clearable/>
                 </td>
               </tr>
               <tr class="td">
                 <td>手机号：</td>
                 <td>
-                  <el-input placeholder="请输入手机号"
-                            v-model="phoneVal"
-                            clearable>
-                  </el-input>
+                  <el-input
+                    v-model="phoneVal"
+                    placeholder="请输入手机号"
+                    clearable/>
                 </td>
               </tr>
               <tr class="td">
                 <td>电子邮箱：</td>
                 <td>
-                  <el-input disabled
-                            v-model="emailVal"
-                            clearable>
-                  </el-input>
+                  <el-input
+                    v-model="emailVal"
+                    disabled
+                    clearable/>
                 </td>
               </tr>
               <tr class="td">
                 <td>联系人姓名：</td>
                 <td>
-                  <el-input placeholder="请输入联系人姓名"
-                            v-model="connectName"
-                            clearable>
-                  </el-input>
+                  <el-input
+                    v-model="connectName"
+                    placeholder="请输入联系人姓名"
+                    clearable/>
                 </td>
               </tr>
               <tr class="td">
                 <td>联系人电话：</td>
                 <td>
-                  <el-input placeholder="请输入联系人电话"
-                            v-model="connectPhnoe"
-                            clearable>
-                  </el-input>
+                  <el-input
+                    v-model="connectPhnoe"
+                    placeholder="请输入联系人电话"
+                    clearable/>
                 </td>
               </tr>
               <tr class="td">
                 <td>联系人地址：</td>
                 <td>
-                  <el-input placeholder="请输入联系人地址"
-                            v-model="connectAddr"
-                            clearable>
-                  </el-input>
+                  <el-input
+                    v-model="connectAddr"
+                    placeholder="请输入联系人地址"
+                    clearable/>
                 </td>
               </tr>
               <tr class="td">
@@ -201,113 +213,127 @@
             </table>
           </div>
 
-          <div v-else-if="show === 31">
-
-          </div>
+          <div v-else-if="show === 31"/>
 
           <div v-else-if="show === 321">
-            <el-tabs v-model="activeName"
-                     @tab-click="handleClick">
-              <el-tab-pane label="正常信息"
-                           name="first">
-                <el-table :data="norTableData"
-                          border
-                          style="width: 100%"
-                          :row-class-name="tableRowClassName">
-                  <el-table-column fixed
-                                   prop="id"
-                                   label="ID"
-                                   width="100">
-                  </el-table-column>
-                  <el-table-column prop="title"
-                                   label="标题">
-                  </el-table-column>
-                  <el-table-column prop="state"
-                                   label="审核状态"
-                                   width="80">
-                  </el-table-column>
-                  <el-table-column prop="updateTime"
-                                   label="更新时间"
-                                   width="100">
-                  </el-table-column>
+            <el-tabs
+              v-model="activeName"
+              @tab-click="handleClick">
+              <el-tab-pane
+                label="正常信息"
+                name="first">
+                <el-table
+                  :data="norTableData"
+                  :row-class-name="tableRowClassName"
+                  border
+                  style="width: 100%">
+                  <el-table-column
+                    fixed
+                    prop="id"
+                    label="ID"
+                    width="100"/>
+                  <el-table-column
+                    prop="title"
+                    label="标题"/>
+                  <el-table-column
+                    prop="state"
+                    label="审核状态"
+                    width="80"/>
+                  <el-table-column
+                    prop="updateTime"
+                    label="更新时间"
+                    width="100"/>
 
-                  <el-table-column label="操作"
-                                   width="100">
+                  <el-table-column
+                    label="操作"
+                    width="100">
                     <template slot-scope="scope">
-                      <el-button @click="pubHandleClick(scope.row)"
-                                 type="text"
-                                 size="small">查看</el-button>
-                      <el-button type="text"
-                                 size="small">编辑</el-button>
+                      <el-button
+                        type="text"
+                        size="small"
+                        @click="pubHandleClick(scope.row)">查看</el-button>
+                      <el-button
+                        type="text"
+                        size="small">编辑</el-button>
                     </template>
                   </el-table-column>
                 </el-table>
               </el-tab-pane>
-              <el-tab-pane label="置顶信息"
-                           name="second">
-                <el-table :data="TopTableData"
-                          border
-                          style="width: 100%">
-                  <el-table-column fixed
-                                   prop="id"
-                                   label="ID"
-                                   width="100">
-                  </el-table-column>
-                  <el-table-column prop="title"
-                                   label="标题">
-                  </el-table-column>
-                  <el-table-column prop="state"
-                                   label="审核状态"
-                                   width="80">
-                  </el-table-column>
-                  <el-table-column prop="updateTime"
-                                   label="更新时间"
-                                   width="100">
-                  </el-table-column>
+              <el-tab-pane
+                label="置顶信息"
+                name="second">
+                <el-table
+                  :data="TopTableData"
+                  border
+                  style="width: 100%">
+                  <el-table-column
+                    fixed
+                    prop="id"
+                    label="ID"
+                    width="100"/>
+                  <el-table-column
+                    prop="title"
+                    label="标题"/>
+                  <el-table-column
+                    prop="state"
+                    label="审核状态"
+                    width="80"/>
+                  <el-table-column
+                    prop="updateTime"
+                    label="更新时间"
+                    width="100"/>
 
-                  <el-table-column label="操作"
-                                   width="100">
+                  <el-table-column
+                    label="操作"
+                    width="100">
                     <template slot-scope="scope">
-                      <el-button @click="pubHandleClick(scope.row)"
-                                 type="text"
-                                 size="small">查看</el-button>
-                      <el-button type="text"
-                                 size="small">编辑</el-button>
+                      <el-button
+                        type="text"
+                        size="small"
+                        @click="pubHandleClick(scope.row)">查看</el-button>
+                      <el-button
+                        type="text"
+                        size="small">编辑</el-button>
                     </template>
                   </el-table-column>
                 </el-table>
               </el-tab-pane>
-              <el-tab-pane label="特急信息"
-                           name="third">
+              <el-tab-pane
+                label="特急信息"
+                name="third">
 
-                <el-table :data="fastTableData"
-                          border
-                          style="width: 100%">
-                  <el-table-column fixed
-                                   prop="id"
-                                   label="ID"
-                                   width="100">
-                  </el-table-column>
-                  <el-table-column prop="title"
-                                   label="标题">
-                  </el-table-column>
-                  <el-table-column prop="state"
-                                   label="审核状态"
-                                   width="80">
-                  </el-table-column>
-                  <el-table-column prop="updateTime"
-                                   label="更新时间"
-                                   width="100">
-                  </el-table-column>
+                <el-table
+                  :data="fastTableData"
+                  border
+                  style="width: 100%">
+                  <el-table-column
+                    fixed
+                    prop="id"
+                    label="ID"
+                    width="100"/>
+                  <el-table-column
+                    prop="title"
+                    label="标题"/>
+                  <el-table-column
+                    prop="state"
+                    label="审核状态"
+                    width="80"/>
+                  <el-table-column
+                    prop="updateTime"
+                    label="更新时间"
+                    width="100"/>
 
-                  <el-table-column label="操作"
-                                   width="100">
+                  <el-table-column
+                    label="操作"
+                    width="100">
                     <template slot-scope="scope">
-                      <el-button @click="pubHandleClick(scope.row)"
-                                 type="text"
-                                 size="small">查看</el-button>
-                      <el-button type="text"
-                                 size="small">编辑</el-button>
+                      <el-button
+                        type="text"
+                        size="small"
+                        @click="pubHandleClick(scope.row)">查看</el-button>
+                      <el-button
+                        type="text"
+                        size="small">编辑</el-button>
                     </template>
                   </el-table-column>
                 </el-table>
@@ -315,30 +341,28 @@
             </el-tabs>
           </div>
           <div v-else-if="show === 322">
-            <el-tabs v-model="activeName"
-                     @tab-click="handleClick">
-              <el-tab-pane label="正常信息"
-                           name="first">正常信息</el-tab-pane>
-              <el-tab-pane label="置顶信息"
-                           name="second">置顶信息</el-tab-pane>
-              <el-tab-pane label="特急信息"
-                           name="third">特急信息</el-tab-pane>
+            <el-tabs
+              v-model="activeName"
+              @tab-click="handleClick">
+              <el-tab-pane
+                label="正常信息"
+                name="first">正常信息</el-tab-pane>
+              <el-tab-pane
+                label="置顶信息"
+                name="second">置顶信息</el-tab-pane>
+              <el-tab-pane
+                label="特急信息"
+                name="third">特急信息</el-tab-pane>
             </el-tabs>
           </div>
-          <div v-else-if="show === 41">
-
-          </div>
-          <div v-else-if="show === 42">
-
-          </div>
-          <div v-else-if="show === 43">
-
-          </div>
+          <div v-else-if="show === 41"/>
+          <div v-else-if="show === 42"/>
+          <div v-else-if="show === 43"/>
         </div>
       </el-row>
     </div>
 
-    <div style="float: clear;"></div>
+    <div style="float: clear;"/>
   </div>
 </template>
 <script>
@@ -756,11 +780,12 @@ export default {
         alert('两次输入的密码不一致')
         return
       }
-      let oldPwd = this.oldPwd
-      let newPWD = this.newPWD
-      this.$api.post('http://localhost/cyx//user/update',
+      const oldPwd = this.oldPwd
+      const newPWD = this.newPWD
+      const id = sessionStorage.getItem('id')
+      this.$api.post('http://118.25.137.189/admin/user/update',
         {
-          oldPwd, newPWD
+          oldPwd, id, newPWD
         }, res => {
           if (res.data !== -1) {
             alert(res.data)

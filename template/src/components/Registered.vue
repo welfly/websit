@@ -5,66 +5,69 @@
       <tr>
         <td class="td">所在城市：</td>
         <td>
-          <el-select v-model="szcs"
-                     filterable
-                     placeholder="请选择">
-            <el-option v-for="item in options"
-                       :key="item.value"
-                       :label="item.label"
-                       :value="item.value">
-            </el-option>
+          <el-select
+            v-model="szcs"
+            filterable
+            placeholder="请选择">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"/>
           </el-select>
         </td>
       </tr>
       <tr>
         <td class="td">主营产品类型：</td>
         <td>
-          <el-select v-model="zycp"
-                     filterable
-                     placeholder="--请选择--">
-            <el-option v-for="item in zycps"
-                       :key="item.value"
-                       :label="item.label"
-                       :value="item.value">
-            </el-option>
+          <el-select
+            v-model="zycp"
+            filterable
+            placeholder="--请选择--">
+            <el-option
+              v-for="item in zycps"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"/>
           </el-select>
         </td>
       </tr>
       <tr class="td">
         <td>邀请码：</td>
         <td>
-          <el-input placeholder="请输入邀请码"
-                    v-model="yqm"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="yqm"
+            placeholder="请输入邀请码"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>登录账户：</td>
         <td>
-          <el-input placeholder="请输入登录账户"
-                    v-model="dlzh"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="dlzh"
+            placeholder="请输入登录账户"
+            clearable/>
         </td>
       </tr>
-      <tr class="td"
-          style="display: none;">
+      <tr
+        class="td"
+        style="display: none;">
         <td>用户类型</td>
         <td>
-          <el-input placeholder="用户类型"
-                    v-model="yhlx"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="yhlx"
+            placeholder="用户类型"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>手机号：</td>
         <td>
-          <el-input placeholder="请输入手机号"
-                    v-model="sjhm"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="sjhm"
+            placeholder="请输入手机号"
+            clearable/>
         </td>
       </tr>
       <!-- <tr class="td">
@@ -81,66 +84,66 @@
       <tr class="td">
         <td>联系人：</td>
         <td>
-          <el-input placeholder="请输入联系人"
-                    v-model="lxr"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="lxr"
+            placeholder="请输入联系人"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>登录密码：</td>
         <td>
-          <el-input type="password"
-                    placeholder="请输入登录密码"
-                    v-model="pwsword"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="pwsword"
+            type="password"
+            placeholder="请输入登录密码"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>确认密码：</td>
         <td>
-          <el-input type="password"
-                    placeholder="请确认密码"
-                    v-model="cfmPWD"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="cfmPWD"
+            type="password"
+            placeholder="请确认密码"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>电子邮箱：</td>
         <td>
-          <el-input placeholder="请输入邮箱"
-                    v-model="dzyx"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="dzyx"
+            placeholder="请输入邮箱"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>联系人：</td>
         <td>
-          <el-input placeholder="请输入联系人姓名"
-                    v-model="name"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="name"
+            placeholder="请输入联系人姓名"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>联系人电话：</td>
         <td>
-          <el-input placeholder="请输入联系人电话"
-                    v-model="lxdh"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="lxdh"
+            placeholder="请输入联系人电话"
+            clearable/>
         </td>
       </tr>
       <tr class="td">
         <td>联系人地址：</td>
         <td>
-          <el-input placeholder="请输入联系人地址"
-                    v-model="lxdz"
-                    clearable>
-          </el-input>
+          <el-input
+            v-model="lxdz"
+            placeholder="请输入联系人地址"
+            clearable/>
         </td>
       </tr>
       <!-- <tr class="td">
@@ -154,14 +157,16 @@
       </tr> -->
       <tr class="td">
         <td colspan="2">
-          <el-button @click="register"
-                     type="success">注册会员</el-button>
+          <el-button
+            type="success"
+            @click="register">注册会员</el-button>
         </td>
       </tr>
       <tr class="td">
         <td colspan="2">
-          <span>如你已经有账号了， <a href="#"
-               @click="login()">点此登录！</a></span>
+          <span>如你已经有账号了， <a
+            href="#"
+            @click="login()">点此登录！</a></span>
         </td>
       </tr>
     </table>
@@ -543,24 +548,24 @@ export default {
       this.$router.push({ path: '/home/login' })
     },
     register () {
-      let szcs = this.szcs
-      let dlzh = this.dlzh
-      let sjhm = this.sjhm
-      let cfmPWD = this.cfmPWD
-      let pwsword = this.pwsword
-      let dzyx = this.dzyx
-      let name = this.name
-      let lxdz = this.lxdz
-      let lxr = this.lxr
-      let lxdh = this.lxdh
-      let mrxfcs = this.mrxfcs
-      let zdfp = this.zdfp
-      let hylx = this.hylx
-      let yhlx = this.yhlx
-      let yqm = this.yqm
-      let zycp = this.zycp
+      const szcs = this.szcs
+      const dlzh = this.dlzh
+      const sjhm = this.sjhm
+      const cfmPWD = this.cfmPWD
+      const pwsword = this.pwsword
+      const dzyx = this.dzyx
+      const name = this.name
+      const lxdz = this.lxdz
+      const lxr = this.lxr
+      const lxdh = this.lxdh
+      const mrxfcs = this.mrxfcs
+      const zdfp = this.zdfp
+      const hylx = this.hylx
+      const yhlx = this.yhlx
+      const yqm = this.yqm
+      const zycp = this.zycp
       console.info(yqm)
-      this.$api.post('http://localhost/cyx/user/save',
+      this.$api.post('http://118.25.137.189/admin/user/save',
         {
           szcs,
           dlzh,

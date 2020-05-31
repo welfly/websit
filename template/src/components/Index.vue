@@ -1,27 +1,17 @@
 <template>
-  <div class="">
+  <div class>
     <div class="title_content">
-      <div class="title_content_date">
-        免费发布领队信息网, 今天是{{year}}年{{month}}月{{day}}日
-      </div>
+      <div class="title_content_date">免费发布领队信息网, 今天是{{ year }}年{{ month }}月{{ day }}日</div>
       <div class="title_content_date_fr">
-        <span class="tel">
-          Tel: 188-8888-8888
+        <span class="tel">Tel: 188-8888-8888</span>
+        <span v-if=" isLogin === '1' || isLogin === null " class="login">
+          <a href="#" @click="registered()">注册</a> |
+          <a href="#" @click="login()">登录</a>
         </span>
-        <span class="login"
-              v-if=" isLogin == '1' ">
-          <a href="#"
-             @click="registered()">注册</a> |
-          <a href="#"
-             @click="login()">登录</a>
-        </span>
-        <span class="login"
-              v-else>
-          <a href="#">{{userName}}</a> |
-          <a href="#"
-             @click="userCenter()">用户中心</a> |
-          <a href="#"
-             @click="userLoginOut()">退出</a>
+        <span v-else class="login">
+          <a href="#">{{ userName }}</a> |
+          <a href="#" @click="userCenter()">用户中心</a> |
+          <a href="#" @click="userLoginOut()">退出</a>
         </span>
       </div>
     </div>
@@ -35,37 +25,30 @@
     </div>
     <div class="container indexCSS">
       <div class="row">
-        <div class="col-sm"
-             @click="goTo(1)">
+        <div class="col-sm" @click="goTo(1)">
           <a>首页</a>
         </div>
-        <div class="col-sm"
-             @click="goTo(2)">
+        <div class="col-sm" @click="goTo(2)">
           <a>免费发布</a>
         </div>
-        <div class="col-sm"
-             @click="goTo(3)">
+        <div class="col-sm" @click="goTo(3)">
           <a>夜场直招</a>
         </div>
-        <div class="col-sm"
-             @click="goTo(4)">
+        <div class="col-sm" @click="goTo(4)">
           <a>使用帮助</a>
         </div>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view/>
     <div class="footer">
-      <div style="border: 1px dashed; margin: 0 .5em;"></div>
+      <div style="border: 1px dashed; margin: 0 .5em;"/>
       <div style="margin: 2em;">
         <a>关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a>联系我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a>免责声明</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="#"
-           @click="help">使用帮助 </a>
+        <a href="#" @click="help">使用帮助</a>
       </div>
-      <div style="margin-bottom: 2em;">
-        &copy;2020-2020 领队直聘 版权所有
-      </div>
+      <div style="margin-bottom: 2em;">&copy;2020-2020 领队直聘 版权所有</div>
     </div>
   </div>
 </template>
@@ -79,8 +62,17 @@ export default {
       month: '',
       day: '',
       isLogin: '1',
-      userName: (sessionStorage.getItem('userMsg')) ? (sessionStorage.getItem('userMsg')).name : 'null'
+      userName: sessionStorage.getItem('userMsg')
+        ? sessionStorage.getItem('userMsg')
+        : 'null'
     }
+  },
+  beforeUpdate () {
+    this.isLogin = sessionStorage.getItem('isLogin')
+    this.userName = sessionStorage.getItem('userMsg')
+  },
+  mounted () {
+    this.getSysTime()
   },
   methods: {
     userCenter () {
@@ -93,7 +85,7 @@ export default {
       this.$router.push({ path: '/home/indexpage' })
     },
     getSysTime () {
-      let date = new Date()
+      const date = new Date()
       this.year = date.getFullYear()
       this.month = date.getMonth() + 1
       this.day = date.getDate()
@@ -102,7 +94,7 @@ export default {
       if (i === 1) {
         this.$router.push({ path: '/home/indexpage' })
       } else if (i === 2) {
-        let isLog = sessionStorage.getItem('isLogin')
+        const isLog = sessionStorage.getItem('isLogin')
         if (isLog === '1') {
           alert('您还未登录，请登录')
           this.$router.push({ path: '/home/login' })
@@ -110,6 +102,7 @@ export default {
           this.$router.push({ path: '/home/freepublish' })
         }
       } else if (i === 3) {
+        console.info(9)
       } else {
         this.$router.push({ path: '/home/help' })
       }
@@ -123,14 +116,7 @@ export default {
     help () {
       this.$router.push({ path: '/home/help' })
     }
-  },
-  beforeUpdate () {
-    this.isLogin = (sessionStorage.getItem('isLogin'))
-  },
-  mounted () {
-    this.getSysTime()
   }
-
 }
 </script>
 <style scoped lang="less">
