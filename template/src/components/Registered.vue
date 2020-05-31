@@ -45,7 +45,7 @@
         <td>登录账户：</td>
         <td>
           <el-input
-            v-model="dlzh"
+            v-model="name"
             placeholder="请输入登录账户"
             clearable/>
         </td>
@@ -123,7 +123,7 @@
         <td>联系人：</td>
         <td>
           <el-input
-            v-model="name"
+            v-model="dlzh"
             placeholder="请输入联系人姓名"
             clearable/>
         </td>

@@ -260,9 +260,10 @@ export default {
         alert('未填写任何发布内容！！')
         return
       }
+      const yxbz = '1'
       this.$api.post('http://118.25.137.189/admin/wz/saveWz',
         {
-          fpsf, fpcs, xxlx, bt, bq, nr, tp, qymc, lxr, lxdh, shbz, fbqx, fpdz
+          fpsf, fpcs, xxlx, bt, bq, nr, tp, qymc, lxr, lxdh, shbz, fbqx, fpdz, yxbz
         }, res => {
           if (res.status === 200) {
             alert(res.data)

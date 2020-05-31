@@ -39,7 +39,12 @@
         </div>
       </div>
     </div>
-    <router-view/>
+    <div
+      style="width: 1200px;
+    margin-left: auto;
+    margin-right: auto;">
+      <router-view/>
+    </div>
     <div class="footer">
       <div style="border: 1px dashed; margin: 0 .5em;"/>
       <div style="margin: 2em;">

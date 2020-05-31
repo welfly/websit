@@ -1,39 +1,41 @@
 <template>
   <div class="hotcityContent">
-    <div class="hotCity">热门城市</div>
-    <div class="gap_line" />
-    <div style="float: left; width: 85%;">
-      <ul class="citysCss">
-        <li
-          v-for="hotCity of hotCitys"
-          :key="hotCity"
-          class="cityCss"
-          @click="getNews()"
-        >{{ hotCity }}</li>
-        <li class="cityCss hotCityOthcss" @click="getOthers">其它地区</li>
-      </ul>
+    <div>
+      <div class="hotCity">热门城市</div>
+      <div class="gap_line" />
+      <div style="float: left; width: 85%; margin-left: 2em;">
+        <ul class="citysCss">
+          <li
+            v-for="hotCity of hotCitys"
+            :key="hotCity"
+            class="cityCss"
+            @click="getNews(1, 30, hotCity)"
+          >{{ hotCity }}</li>
+          <li class="cityCss hotCityOthcss" @click="getOthers">其它地区</li>
+        </ul>
+      </div>
+      <el-drawer :visible.sync="drawer" :with-header="false">
+        <span>
+          <div>请选择区域</div>
+          <div>
+            <el-select v-model="selValue" filterable placeholder="请选择 / 搜索区域" @change="getSec()">
+              <el-option-group
+                v-for="secOption in secOptions"
+                :key="secOption.code"
+                :label="secOption.name"
+              >
+                <el-option
+                  v-for="item in secOption.cities"
+                  :key="item.code"
+                  :label="item.name"
+                  :value="item.name"
+                />
+              </el-option-group>
+            </el-select>
+          </div>
+        </span>
+      </el-drawer>
     </div>
-    <el-drawer :visible.sync="drawer" :with-header="false">
-      <span>
-        <div>请选择区域</div>
-        <div>
-          <el-select v-model="selValue" filterable placeholder="请选择 / 搜索区域" @change="getSec()">
-            <el-option-group
-              v-for="secOption in secOptions"
-              :key="secOption.code"
-              :label="secOption.name"
-            >
-              <el-option
-                v-for="item in secOption.cities"
-                :key="item.code"
-                :label="item.name"
-                :value="item.name"
-              />
-            </el-option-group>
-          </el-select>
-        </div>
-      </span>
-    </el-drawer>
     <div>
       <a href="#">
         <img style="margin-bottom: .5em;" src="../../static/img/1.jpg" >
@@ -48,6 +50,7 @@
         <img style="margin-bottom: .5em;" src="../../static/img/4.jpg" >
       </a>
     </div>
+
     <div class="ad_main">
       <!-- <div class="ad_left"
            v-show="ad_left">
@@ -101,7 +104,7 @@
         </a>
         <a
           href="javascript:window.scrollTo(0,0)"
-          style="position: fixed; bottom: 2em; background-color: wheat; width: 5em; height: 5em; line-height: 5em;"
+          style="position: fixed; bottom: 2em; background-color: wheat; width: 5em; height: 5em; line-height: 5em; margin-left: 2em;"
           title="回到顶端"
         >回到顶端</a>
       </div>
@@ -116,6 +119,7 @@ export default {
       provinces: [],
       citys: [],
       hotCitys: [],
+      fBCity: '', // 发布城市
       ad_left: true,
       ad_right: true,
       news_content: [], // 消息内容
@@ -132,10 +136,14 @@ export default {
   },
   mounted () {
     this.getCitys()
-    this.getNews(1, 30) // 默认第一页，每页30条
+    this.getNews(1, 30, this.fBCity) // 默认第一页，每页30条
   },
   methods: {
-    getSec () {},
+    getSec () {
+      // console.info()
+      this.fBCity = this.selValue
+      this.getNews(1, 30, this.fBCity)
+    },
     getOthers () {
       this.drawer = !this.drawer
     },
@@ -144,7 +152,7 @@ export default {
     },
     handleSizeChange (val) { // 改变每页的数量
       console.info(val)
-      this.getNews(1, val)
+      this.getNews(1, val, this.fBCity)
       this.evePageCount = val
       this.crtpageContent = []
     },
@@ -152,14 +160,21 @@ export default {
       console.info(val, 22)
       this.currentPage = val
       this.crtpageContent = []
-      this.getNews(val, this.evePageCount)
+      this.getNews(val, this.evePageCount, this.fBCity)
     },
-    getNews (pNum, lmt) {
+    getNews (pNum, lmt, fbCity) {
+      console.log(fbCity)
       const pageNum = pNum
       const limit = lmt
+      const fbcs = fbCity
+      let para = { pageNum, limit }
+      if (fbcs !== '') {
+        para = { pageNum, limit, fbcs }
+        this.fBCity = fbCity
+      }
       this.$api.post(
-        'http://118.25.137.189/admin/wz/getWzPage',
-        { pageNum, limit },
+        'http://118.25.137.189/admin/wz/getWzPage', para
+        ,
         res => {
           if (res.status === 200) {
             this.news_content = res.data.data
@@ -233,15 +248,15 @@ export default {
     width: 1.1em;
     line-height: 1.5em;
     float: left;
-    margin-left: 4%;
-    margin-top: 0.5em;
+    margin-left: 6%;
+    margin-top: 1.5em;
     font-size: 1.2em;
   }
   .block {
     margin-top: 2em;
   }
   .gap_line {
-    height: 8em;
+    height: 10em;
     border-right-style: dashed;
     width: 2px;
     background-color: black;
@@ -286,10 +301,10 @@ export default {
       bottom: 0px;
     }
     .main_content {
-      background-color: yellow;
+      background-color: #fcfcfc;
       width: 55em;
       float: left;
-      margin-left: 9.6%;
+      margin-left: 4.15%;
     }
     .ad_right {
       width: 13em;
@@ -313,6 +328,9 @@ export default {
       line-height: 1.8em;
       text-align: left;
       margin-left: 2em;
+      & a{
+            color: black;
+      }
     }
     .pub_date {
       float: right;

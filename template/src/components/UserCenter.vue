@@ -757,6 +757,9 @@ export default {
         this.show = i
       } else if (i === 321) {
         this.show = i
+        this.$api.post('http://118.25.137.189/admin/wz/getWzPageByUser', {}, res => {
+          console.info(res)
+        })
       } else if (i === 322) {
         this.show = i
       } else if (i === 41) {
@@ -780,12 +783,12 @@ export default {
         alert('两次输入的密码不一致')
         return
       }
-      const oldPwd = this.oldPwd
+      // const oldPwd = this.oldPwd
       const newPWD = this.newPWD
       const id = sessionStorage.getItem('id')
-      this.$api.post('http://118.25.137.189/admin/user/update',
+      this.$api.post('http://118.25.137.189/admin/user/updatePsw',
         {
-          oldPwd, id, newPWD
+          id, newPWD
         }, res => {
           if (res.data !== -1) {
             alert(res.data)

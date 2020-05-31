@@ -57,7 +57,6 @@ export default {
         }, res => {
           if (res && res.data !== -1) {
             const uname = res.data.name + ''
-            console.info(uname)
             sessionStorage.setItem('userMsg', uname)
             sessionStorage.setItem('isLogin', '0')
             sessionStorage.setItem('id', res.data.id)
