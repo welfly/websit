@@ -70,7 +70,7 @@
       <tr class="td">
         <td>内容：</td>
         <td style="width: 50em">
-          <EditorBox ele-id="EditorBox" @editorContent="getContent"/>
+          <EditorBox ele-id="EditorBox" content="nr" @editorContent="getContent"/>
         </td>
       </tr>
       <tr class="td">
@@ -166,11 +166,27 @@ export default {
       lxdh: '',
       shbz: '',
       fbqx: '',
-      fpdz: ''
+      fpdz: '',
+      changeData: {}
     }
   },
   mounted () {
     this.getCitys()
+    this.changeData = JSON.parse(sessionStorage.getItem('changeData'))
+    if (this.changeData) {
+      this.bt = this.changeData.bt
+      this.nr = this.changeData.nr
+      this.fpsf = this.changeData.fpsf
+      this.fpcs = this.changeData.fpcs
+      this.xxlx = this.changeData.xxlx
+      this.bq = this.changeData.bq
+      this.qymc = this.changeData.qymc
+      this.lxr = this.changeData.lxr
+      this.lxdh = this.changeData.lxdh
+      this.shbz = this.changeData.shbz
+      this.fbqx = this.changeData.fbqx
+      this.fpdz = this.changeData.fpdz
+    }
   },
   methods: {
 
@@ -261,7 +277,7 @@ export default {
         return
       }
       const yxbz = '1'
-      this.$api.post('http://118.25.137.189/admin/wz/saveWz',
+      this.$api.post('http://localhost/cyx/wz/saveWz',
         {
           fpsf, fpcs, xxlx, bt, bq, nr, tp, qymc, lxr, lxdh, shbz, fbqx, fpdz, yxbz
         }, res => {

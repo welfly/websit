@@ -166,14 +166,14 @@ export default {
       console.log(fbCity)
       const pageNum = pNum
       const limit = lmt
-      const fbcs = fbCity
+      const fpcs = fbCity
       let para = { pageNum, limit }
-      if (fbcs !== '') {
-        para = { pageNum, limit, fbcs }
+      if (fpcs !== '') {
+        para = { pageNum, limit, fpcs }
         this.fBCity = fbCity
       }
       this.$api.post(
-        'http://118.25.137.189/admin/wz/getWzPage', para
+        'http://localhost/cyx/wz/getWzPage', para
         ,
         res => {
           if (res.status === 200) {

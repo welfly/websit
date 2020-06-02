@@ -50,7 +50,10 @@
                 <el-menu-item
                   index="3-1"
                   @click="menuCli(31)">发布信息</el-menu-item>
-                <el-submenu index="3-2">
+                <el-menu-item
+                  index="3-2"
+                  @click="menuCli(321)">管理我的信息</el-menu-item>
+                  <!-- <el-submenu index="3-2">
                   <template slot="title">
                     <span>管理我的信息</span>
                   </template>
@@ -62,7 +65,7 @@
                       index="3-2-2"
                       @click="menuCli(322)">待审核</el-menu-item>
                   </el-menu-item-group>
-                </el-submenu>
+                </el-submenu> -->
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="4">
@@ -220,7 +223,7 @@
               v-model="activeName"
               @tab-click="handleClick">
               <el-tab-pane
-                label="正常信息"
+                label="信息列表"
                 name="first">
                 <el-table
                   :data="norTableData"
@@ -233,14 +236,14 @@
                     label="ID"
                     width="100"/>
                   <el-table-column
-                    prop="title"
+                    prop="bt"
                     label="标题"/>
                   <el-table-column
-                    prop="state"
+                    prop="shbz"
                     label="审核状态"
                     width="80"/>
                   <el-table-column
-                    prop="updateTime"
+                    prop="fbsj"
                     label="更新时间"
                     width="100"/>
 
@@ -251,15 +254,17 @@
                       <el-button
                         type="text"
                         size="small"
-                        @click="pubHandleClick(scope.row)">查看</el-button>
+                        @click="watchClick(scope.row.id)">查看</el-button>
                       <el-button
                         type="text"
-                        size="small">编辑</el-button>
+                        size="small"
+                        @click="changeClick(scope.row)">修改</el-button>
                     </template>
                   </el-table-column>
                 </el-table>
               </el-tab-pane>
-              <el-tab-pane
+
+              <!-- <el-tab-pane
                 label="置顶信息"
                 name="second">
                 <el-table
@@ -297,8 +302,8 @@
                     </template>
                   </el-table-column>
                 </el-table>
-              </el-tab-pane>
-              <el-tab-pane
+              </el-tab-pane> -->
+              <!-- <el-tab-pane
                 label="特急信息"
                 name="third">
 
@@ -337,8 +342,9 @@
                     </template>
                   </el-table-column>
                 </el-table>
-              </el-tab-pane>
+              </el-tab-pane> -->
             </el-tabs>
+            <!-- <FreePublish/> -->
           </div>
           <div v-else-if="show === 322">
             <el-tabs
@@ -366,8 +372,12 @@
   </div>
 </template>
 <script>
+// import FreePublish from './FreePublish'
 export default {
   name: 'UserCenter',
+  // components: {
+  //   FreePublish
+  // },
   data () {
     return {
       odU: 1,
@@ -718,33 +728,16 @@ export default {
       optionValue: '',
       show: 1,
       activeName: 'first',
-      norTableData: [{
-        id: '2016-05-02',
-        title: '王小虎王小虎',
-        state: 'ok',
-        updateTime: '2020-06-06'
-      }, {
-        id: '2016-05-02',
-        title: '王小虎王ss小虎',
-        state: 'no',
-        updateTime: '2020-06-06'
-      }, {
-        id: '2016-05-02',
-        title: '王小虎王小虎44',
-        state: 'ok',
-        updateTime: '2020-06-06'
-      }, {
-        id: '2016-05-02',
-        title: '王小虎',
-        state: 'no',
-        updateTime: '2020-06-06'
-      }],
-      TopTableData: [],
-      fastTableData: []
+      norTableData: []
+      // TopTableData: [],
+      // fastTableData: []
 
     }
   },
   methods: {
+    watchClick (id) {
+      window.open('http://118.25.137.189/wz/' + id + '.html')
+    },
     handleClick (tab, event) {
       console.log(tab, event)
     },
@@ -755,13 +748,23 @@ export default {
         this.show = i
       } else if (i === 31) {
         this.show = i
+        this.$router.push({ path: '/home/freepublish' })
       } else if (i === 321) {
         this.show = i
-        this.$api.post('http://118.25.137.189/admin/wz/getWzPageByUser', {}, res => {
-          console.info(res)
+        // const shbz = '已发布'
+        const pageNum = 1
+        const limit = 1000
+        this.$api.post('http://localhost/cyx/wz/getWzPageByUser', { pageNum, limit }, res => {
+          this.norTableData = res.data.data
         })
       } else if (i === 322) {
         this.show = i
+        const shbz = '审核中'
+        const pageNum = 1
+        const limit = 1000
+        this.$api.post('http://localhost/cyx/wz/getWzPageByUser', { shbz, pageNum, limit }, res => {
+          console.info(res)
+        })
       } else if (i === 41) {
         this.show = i
       } else if (i === 42) {
@@ -784,11 +787,11 @@ export default {
         return
       }
       // const oldPwd = this.oldPwd
-      const newPWD = this.newPWD
+      const pwsword = this.newPWD
       const id = sessionStorage.getItem('id')
-      this.$api.post('http://118.25.137.189/admin/user/updatePsw',
+      this.$api.post('http://localhost/cyx/user/updatePsw',
         {
-          id, newPWD
+          id, pwsword
         }, res => {
           if (res.data !== -1) {
             alert(res.data)
@@ -798,12 +801,14 @@ export default {
           }
         })
     },
-    pubHandleClick (row) {
+    changeClick (row) {
+      sessionStorage.setItem('changeData', JSON.stringify(row))
+      this.$router.push({ path: '/home/freepublish' })
       console.log(row)
     },
     tableRowClassName ({ row, rowIndex }) {
-      console.info(row.state)
-      if (row.state === 'no') {
+      console.info(row.shbz)
+      if (row.state === '审核中') {
         console.info(rowIndex)
         return 'warning-row'
       } else {

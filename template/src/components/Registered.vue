@@ -565,7 +565,7 @@ export default {
       const yqm = this.yqm
       const zycp = this.zycp
       console.info(yqm)
-      this.$api.post('http://118.25.137.189/admin/user/save',
+      this.$api.post('http://localhost/cyx/user/save',
         {
           szcs,
           dlzh,

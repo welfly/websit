@@ -112,14 +112,31 @@
             display: inline-block;
         }
     </style>
-    <script></script>
+    <script>
+
+    </script>
 </head>
 
 <body>
     <div class="">
         <div class="title_content">
             <div class="title_content_date">
-                免费发布领队信息网, 今天是{{year}}年{{month}}月{{day}}日
+                免费发布领队信息网, 今天是
+                <script>
+                    var date = new Date();
+                    document.write(date.getFullYear())
+                </script>
+                年
+                <script>
+                    var date = new Date();
+                    document.write(date.getMonth()+1)
+                </script>
+                月
+                <script>
+                    var date = new Date();
+                    document.write(date.getDate())
+                </script>
+                日
             </div>
             <div class="title_content_date_fr">
                 <span class="tel">
@@ -248,7 +265,7 @@
         </div>
 </body>
 <script>
-    var addrs = 'http://118.25.137.189/admin:8080/'
+    var addrs = 'http://localhost/cyx:8080/'
     function goTo(i) {
         if (i === 1) {
             window.open(addrs + 'home/indexpage', '_self')

@@ -51,7 +51,7 @@ export default {
     login () {
       const name = this.loginVal
       const pwsword = this.loginPWDVal
-      this.$api.post('http://118.25.137.189/admin/user/loginqt',
+      this.$api.post('http://localhost/cyx/user/loginqt',
         {
           name, pwsword
         }, res => {

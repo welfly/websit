@@ -11,8 +11,11 @@ export default {
     eleId: {
       type: String,
       default: ''
+    },
+    content: {
+      default: '',
+      type: String
     }
-
   },
   data () {
     return {
@@ -111,6 +114,8 @@ export default {
           this.editorContent = html
         }
         self.editor.create()
+        const eds = document.getElementsByClassName('w-e-text-container')
+        eds[0].style = eds[0].style.cssText + 'height: 500px'
       })
     },
     filesToBase64 (files) {
@@ -138,7 +143,7 @@ export default {
           // Object.keys(self.uploadImgForm).forEach((key) => {
           formdata.append('file', blob, self.uploadImgForm.Name)
           // })
-          axios.post('http://118.25.137.189/admin/tp/upload', formdata, {
+          axios.post('http://localhost/cyx/tp/upload', formdata, {
             headers: {
               'Content-Type': 'text/plain;charset=UTF-8'
             }
