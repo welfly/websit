@@ -37,10 +37,10 @@ export default new Router({
         },
         {
           path: 'usercenter',
-          component: resolve => require(['@/components/UserCenter'], resolve)
-          // meta: {
-          //   requiresAuth: true
-          // }
+          component: resolve => require(['@/components/UserCenter'], resolve),
+          meta: {
+            requiresAuth: true
+          }
         }
       ]
     }

@@ -5,6 +5,13 @@
 <script>
 import Editor from 'wangeditor'
 import axios from 'axios'
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement('script')
+  hm.src = 'https://hm.baidu.com/hm.js?38a5b50cc0cc263cbb7a0b1de76cf498'
+  var s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(hm, s)
+})()
 export default {
   name: 'EditorBox',
   props: {
@@ -116,6 +123,10 @@ export default {
         self.editor.create()
         const eds = document.getElementsByClassName('w-e-text-container')
         eds[0].style = eds[0].style.cssText + 'height: 500px'
+        const isChangeDa = sessionStorage.getItem('isChangeData')
+        if (isChangeDa === '1' && JSON.parse(sessionStorage.getItem('changeData'))) {
+          self.editor.txt.html(JSON.parse(sessionStorage.getItem('changeData')).nr)
+        }
       })
     },
     filesToBase64 (files) {
@@ -143,7 +154,7 @@ export default {
           // Object.keys(self.uploadImgForm).forEach((key) => {
           formdata.append('file', blob, self.uploadImgForm.Name)
           // })
-          axios.post('http://localhost/cyx/tp/upload', formdata, {
+          axios.post('http://lingduizhipin.com/admin/tp/upload', formdata, {
             headers: {
               'Content-Type': 'text/plain;charset=UTF-8'
             }

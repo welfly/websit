@@ -2,24 +2,24 @@
 {
     "provinces": [
       {
-        "name":"北京市",
+        "name":"北京",
         "level":"1",
         "code":"1100",
         "cities":[
           {
-            "name":"北京市",
+            "name":"北京",
             "level":"1",
             "code":"1100"
           }
         ]
       },
       {
-        "name":"天津市",
+        "name":"天津",
         "level":"1",
         "code":"1200",
         "cities":[
           {
-            "name":"天津市",
+            "name":"天津",
             "level":"1",
             "code":"1200"
           }
@@ -418,12 +418,12 @@
         ]
       },
       {
-        "name":"上海市",
+        "name":"上海",
         "level":"1",
         "code":"3100",
         "cities":[
           {
-            "name":"上海市",
+            "name":"上海",
             "level":"1",
             "code":"3100"
           }
@@ -1309,12 +1309,12 @@
         ]
       },
       {
-        "name":"重庆市",
+        "name":"重庆",
         "level":"1",
         "code":"5000",
         "cities":[
           {
-            "name":"重庆市",
+            "name":"重庆",
             "level":"1",
             "code":"5000"
           }
@@ -1904,12 +1904,12 @@
         ]
       },
       {
-        "name":"台湾省",
+        "name":"台湾地区",
         "level":"1",
         "code":"7100",
         "cities":[
           {
-            "name":"台湾省",
+            "name":"台湾地区",
             "level":"1",
             "code":"7100"
           }

@@ -2,7 +2,7 @@
   <div style=" margin-left: 5em;">
     <div style="text-align: left;  margin-left: 3em; margin-top: 1.3em; font-size: 1.5em;">免费注册会员</div>
     <table style=" margin-left: 5em;">
-      <tr>
+      <!-- <tr>
         <td class="td">所在城市：</td>
         <td>
           <el-select
@@ -16,8 +16,8 @@
               :value="item.value"/>
           </el-select>
         </td>
-      </tr>
-      <tr>
+      </tr> -->
+      <!-- <tr>
         <td class="td">主营产品类型：</td>
         <td>
           <el-select
@@ -31,26 +31,18 @@
               :value="item.value"/>
           </el-select>
         </td>
-      </tr>
-      <tr class="td">
-        <td>邀请码：</td>
-        <td>
-          <el-input
-            v-model="yqm"
-            placeholder="请输入邀请码"
-            clearable/>
-        </td>
-      </tr>
+      </tr> -->
       <tr class="td">
         <td>登录账户：</td>
         <td>
           <el-input
             v-model="name"
             placeholder="请输入登录账户"
-            clearable/>
+            clearable
+            @blur="checkUName"/>
         </td>
       </tr>
-      <tr
+      <!-- <tr
         class="td"
         style="display: none;">
         <td>用户类型</td>
@@ -60,16 +52,7 @@
             placeholder="用户类型"
             clearable/>
         </td>
-      </tr>
-      <tr class="td">
-        <td>手机号：</td>
-        <td>
-          <el-input
-            v-model="sjhm"
-            placeholder="请输入手机号"
-            clearable/>
-        </td>
-      </tr>
+      </tr> -->
       <!-- <tr class="td">
         <td>手机验证码：</td>
         <td>
@@ -81,7 +64,7 @@
         <el-button style="margin-left: 2em;"
                    type="info">获取验证码</el-button>
       </tr> -->
-      <tr class="td">
+      <!-- <tr class="td">
         <td>联系人：</td>
         <td>
           <el-input
@@ -89,7 +72,7 @@
             placeholder="请输入联系人"
             clearable/>
         </td>
-      </tr>
+      </tr> -->
       <tr class="td">
         <td>登录密码：</td>
         <td>
@@ -111,6 +94,24 @@
         </td>
       </tr>
       <tr class="td">
+        <td>手机号：</td>
+        <td>
+          <el-input
+            v-model="sjhm"
+            placeholder="请输入手机号"
+            clearable/>
+        </td>
+      </tr>
+      <tr class="td">
+        <td>邀请码：</td>
+        <td>
+          <el-input
+            v-model="yqm"
+            placeholder="邀请码请联系管理员"
+            clearable/>
+        </td>
+      </tr>
+      <!-- <tr class="td">
         <td>电子邮箱：</td>
         <td>
           <el-input
@@ -118,8 +119,8 @@
             placeholder="请输入邮箱"
             clearable/>
         </td>
-      </tr>
-      <tr class="td">
+      </tr> -->
+      <!-- <tr class="td">
         <td>联系人：</td>
         <td>
           <el-input
@@ -145,7 +146,7 @@
             placeholder="请输入联系人地址"
             clearable/>
         </td>
-      </tr>
+      </tr> -->
       <!-- <tr class="td">
         <td>验证码：</td>
         <td>
@@ -173,350 +174,355 @@
   </div>
 </template>
 <script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement('script')
+  hm.src = 'https://hm.baidu.com/hm.js?38a5b50cc0cc263cbb7a0b1de76cf498'
+  var s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(hm, s)
+})()
 export default {
   data () {
     return {
-      options: [
-        { value: '292', label: 'A安顺' },
-        { value: '303', label: 'A阿克苏' },
-        { value: '310', label: 'A阿勒泰' },
-        { value: '332', label: 'A安康' },
-        { value: '339', label: 'A阿里' },
-        { value: '365', label: 'A阿拉善' },
-        { value: '366', label: 'A澳门' },
-        { value: '137', label: 'A安阳' },
-        { value: '157', label: 'A鞍山' },
-        { value: '188', label: 'A阿坝' },
-        { value: '242', label: 'A安庆' },
-        { value: '260', label: 'B北海' },
-        { value: '265', label: 'B百色' },
-        { value: '276', label: 'B白银' },
-        { value: '30', label: 'B北京' },
-        { value: '294', label: 'B毕节' },
-        { value: '305', label: 'B巴音郭楞蒙古' },
-        { value: '307', label: 'B博尔塔拉蒙古' },
-        { value: '326', label: 'B宝鸡' },
-        { value: '77', label: 'B滨州' },
-        { value: '355', label: 'B包头' },
-        { value: '361', label: 'B巴彦淖尔' },
-        { value: '152', label: 'B白山' },
-        { value: '154', label: 'B白城' },
-        { value: '159', label: 'B本溪' },
-        { value: '186', label: 'B巴中' },
-        { value: '194', label: 'B保山' },
-        { value: '217', label: 'B保定' },
-        { value: '249', label: 'B亳州' },
-        { value: '254', label: 'B蚌埠' },
-        { value: '267', label: 'C池州' },
-        { value: '269', label: 'C崇左' },
-        { value: '33', label: 'C重庆' },
-        { value: '36', label: 'C潮州' },
-        { value: '306', label: 'C昌吉' },
-        { value: '335', label: 'C昌都' },
-        { value: '357', label: 'C赤峰' },
-        { value: '105', label: 'C长沙' },
-        { value: '107', label: 'C常德' },
-        { value: '110', label: 'C郴州' },
-        { value: '147', label: 'C长春' },
-        { value: '167', label: 'C朝阳' },
-        { value: '170', label: 'C成都' },
-        { value: '202', label: 'C楚雄' },
-        { value: '210', label: 'C承德' },
-        { value: '214', label: 'C沧州' },
-        { value: '221', label: 'C长治' },
-        { value: '238', label: 'C常州' },
-        { value: '244', label: 'C滁州' },
-        { value: '247', label: 'C巢湖' },
-        { value: '250', label: 'C池州' },
-        { value: '283', label: 'D定西' },
-        { value: '48', label: 'D东莞' },
-        { value: '75', label: 'D德州' },
-        { value: '81', label: 'D东营' },
-        { value: '346', label: 'D大庆' },
-        { value: '353', label: 'D大兴安岭' },
-        { value: '156', label: 'D大连' },
-        { value: '160', label: 'D丹东' },
-        { value: '174', label: 'D德阳' },
-        { value: '183', label: 'D达州' },
-        { value: '203', label: 'D大理' },
-        { value: '204', label: 'D德宏' },
-        { value: '206', label: 'D迪庆' },
-        { value: '219', label: 'D大同' },
-        { value: '94', label: 'E鄂州' },
-        { value: '99', label: 'E恩施' },
-        { value: '359', label: 'E鄂尔多斯' },
-        { value: '261', label: 'F防城港' },
-        { value: '37', label: 'F佛山' },
-        { value: '83', label: 'F福州' },
-        { value: '128', label: 'F抚州' },
-        { value: '158', label: 'F抚顺' },
-        { value: '163', label: 'F阜新' },
-        { value: '245', label: 'F阜阳' },
-        { value: '263', label: 'G贵港' },
-        { value: '271', label: 'G桂林' },
-        { value: '286', label: 'G甘南' },
-        { value: '289', label: 'G贵阳' },
-        { value: '34', label: 'G广州' },
-        { value: '316', label: 'G果洛' },
-        { value: '322', label: 'G固原' },
-        { value: '125', label: 'G赣州' },
-        { value: '176', label: 'G广元' },
-        { value: '182', label: 'G广安' },
-        { value: '189', label: 'G甘孜' },
-        { value: '257', label: 'H淮北' },
-        { value: '266', label: 'H贺州' },
-        { value: '287', label: 'H海口' },
-        { value: '42', label: 'H惠州' },
-        { value: '45', label: 'H河源' },
-        { value: '301', label: 'H哈密' },
-        { value: '302', label: 'H和田' },
-        { value: '55', label: 'H杭州' },
-        { value: '312', label: 'H海东' },
-        { value: '57', label: 'H湖州' },
-        { value: '313', label: 'H海北' },
-        { value: '314', label: 'H黄南' },
-        { value: '315', label: 'H海南' },
-        { value: '318', label: 'H海西' },
-        { value: '71', label: 'H潍坊' },
-        { value: '330', label: 'H汉中' },
-        { value: '78', label: 'H菏泽' },
-        { value: '341', label: 'H哈尔滨' },
-        { value: '344', label: 'H鹤岗' },
-        { value: '351', label: 'H黑河' },
-        { value: '96', label: 'H黄冈' },
-        { value: '354', label: 'H呼和浩特' },
-        { value: '100', label: 'H黄石' },
-        { value: '360', label: 'H呼伦贝尔' },
-        { value: '112', label: 'H怀化' },
-        { value: '117', label: 'H衡阳' },
-        { value: '135', label: 'H鹤壁' },
-        { value: '168', label: 'H葫芦岛' },
-        { value: '200', label: 'H红河' },
-        { value: '211', label: 'H邯郸' },
-        { value: '216', label: 'H衡水' },
-        { value: '235', label: 'H淮安' },
-        { value: '243', label: 'H黄山' },
-        { value: '252', label: 'H合肥' },
-        { value: '255', label: 'H淮南' },
-        { value: '274', label: 'J嘉峪关' },
-        { value: '275', label: 'J金昌' },
-        { value: '281', label: 'J酒泉' },
-        { value: '38', label: 'J江门' },
-        { value: '50', label: 'J揭阳' },
-        { value: '59', label: 'J金华' },
-        { value: '65', label: 'J嘉兴' },
-        { value: '70', label: 'J济宁' },
-        { value: '82', label: 'J济南' },
-        { value: '343', label: 'J鸡西' },
-        { value: '348', label: 'J佳木斯' },
-        { value: '93', label: 'J荆门' },
-        { value: '103', label: 'J荆州' },
-        { value: '120', label: 'J景德镇' },
-        { value: '122', label: 'J九江' },
-        { value: '126', label: 'J吉安' },
-        { value: '134', label: 'J焦作' },
-        { value: '148', label: 'J吉林' },
-        { value: '161', label: 'J锦州' },
-        { value: '222', label: 'J晋城' },
-        { value: '224', label: 'J晋中' },
-        { value: '299', label: 'K克拉玛依' },
-        { value: '304', label: 'K喀什' },
-        { value: '131', label: 'K开封' },
-        { value: '191', label: 'K昆明' },
-        { value: '268', label: 'L来宾' },
-        { value: '270', label: 'L柳州' },
-        { value: '273', label: 'L兰州' },
-        { value: '284', label: 'L陇南' },
-        { value: '285', label: 'L临夏' },
-        { value: '290', label: 'L六盘水' },
-        { value: '63', label: 'L丽水' },
-        { value: '73', label: 'L莱芜' },
-        { value: '74', label: 'L临沂' },
-        { value: '76', label: 'L聊城' },
-        { value: '334', label: 'L拉萨' },
-        { value: '340', label: 'L林芝' },
-        { value: '91', label: 'L龙岩' },
-        { value: '113', label: 'L娄底' },
-        { value: '132', label: 'L洛阳' },
-        { value: '140', label: 'L漯河' },
-        { value: '150', label: 'L辽源' },
-        { value: '164', label: 'L辽阳' },
-        { value: '173', label: 'L泸州' },
-        { value: '179', label: 'L乐山' },
-        { value: '190', label: 'L凉山' },
-        { value: '196', label: 'L丽江' },
-        { value: '198', label: 'L临沧' },
-        { value: '215', label: 'L廊坊' },
-        { value: '227', label: 'L临汾' },
-        { value: '228', label: 'L吕梁' },
-        { value: '230', label: 'L连云港' },
-        { value: '248', label: 'L六安' },
-        { value: '256', label: 'M马鞍山' },
-        { value: '40', label: 'M茂名' },
-        { value: '43', label: 'M梅州' },
-        { value: '350', label: 'M牡丹江' },
-        { value: '175', label: 'M绵阳' },
-        { value: '184', label: 'M眉山' },
-        { value: '259', label: 'N南宁' },
-        { value: '56', label: 'N宁波' },
-        { value: '338', label: 'N那曲' },
-        { value: '85', label: 'N宁德' },
-        { value: '90', label: 'N南平' },
-        { value: '119', label: 'N南昌' },
-        { value: '142', label: 'N南阳' },
-        { value: '178', label: 'N内江' },
-        { value: '180', label: 'N南充' },
-        { value: '205', label: 'N怒江' },
-        { value: '229', label: 'N南京' },
-        { value: '240', label: 'N南通' },
-        { value: '280', label: 'P平凉' },
-        { value: '86', label: 'P莆田' },
-        { value: '121', label: 'P萍乡' },
-        { value: '133', label: 'P平顶山' },
-        { value: '138', label: 'P濮阳' },
-        { value: '165', label: 'P盘锦' },
-        { value: '172', label: 'P攀枝花' },
-        { value: '197', label: 'P普洱' },
-        { value: '262', label: 'Q钦州' },
-        { value: '282', label: 'Q庆阳' },
-        { value: '295', label: 'Q黔西南' },
-        { value: '296', label: 'Q黔东南' },
-        { value: '297', label: 'Q黔南' },
-        { value: '47', label: 'Q清远' },
-        { value: '60', label: 'Q衢州' },
-        { value: '66', label: 'Q青岛' },
-        { value: '342', label: 'Q齐齐哈尔' },
-        { value: '88', label: 'Q泉州' },
-        { value: '349', label: 'Q七台河' },
-        { value: '192', label: 'Q曲靖' },
-        { value: '207', label: 'Q秦皇岛' },
-        { value: '72', label: 'R日照' },
-        { value: '337', label: 'R日喀则' },
-        { value: '32', label: 'S上海' },
-        { value: '288', label: 'S三亚' },
-        { value: '35', label: 'S深圳' },
-        { value: '44', label: 'S汕尾' },
-        { value: '53', label: 'S汕头' },
-        { value: '54', label: 'S韶关' },
-        { value: '58', label: 'S绍兴' },
-        { value: '320', label: 'S石嘴山' },
-        { value: '333', label: 'S商洛' },
-        { value: '336', label: 'S山南' },
-        { value: '87', label: 'S三明' },
-        { value: '345', label: 'S双鸭山' },
-        { value: '352', label: 'S绥化' },
-        { value: '98', label: 'S随州' },
-        { value: '102', label: 'S十堰' },
-        { value: '118', label: 'S邵阳' },
-        { value: '129', label: 'S上饶' },
-        { value: '141', label: 'S三门峡' },
-        { value: '143', label: 'S商丘' },
-        { value: '149', label: 'S四平' },
-        { value: '153', label: 'S松原' },
-        { value: '169', label: 'S沈阳' },
-        { value: '177', label: 'S遂宁' },
-        { value: '195', label: 'S邵通' },
-        { value: '208', label: 'S石家庄' },
-        { value: '223', label: 'S朔州' },
-        { value: '234', label: 'S宿迁' },
-        { value: '239', label: 'S苏州' },
-        { value: '246', label: 'S宿州' },
-        { value: '258', label: 'T铜陵' },
-        { value: '277', label: 'T天水' },
-        { value: '31', label: 'T天津' },
-        { value: '293', label: 'T铜仁' },
-        { value: '300', label: 'T吐鲁番' },
-        { value: '309', label: 'T塔城' },
-        { value: '62', label: 'T台州' },
-        { value: '67', label: 'T泰安' },
-        { value: '325', label: 'T铜川' },
-        { value: '358', label: 'T通辽' },
-        { value: '368', label: 'T台湾' },
-        { value: '151', label: 'T通化' },
-        { value: '166', label: 'T铁岭' },
-        { value: '209', label: 'T唐山' },
-        { value: '218', label: 'T太原' },
-        { value: '233', label: 'T泰州' },
-        { value: '272', label: 'W梧州' },
-        { value: '278', label: 'W武威' },
-        { value: '298', label: 'W乌鲁木齐' },
-        { value: '64', label: 'W温州' },
-        { value: '321', label: 'W吴忠' },
-        { value: '69', label: 'W威海' },
-        { value: '328', label: 'W渭南' },
-        { value: '92', label: 'W武汉' },
-        { value: '356', label: 'W乌海' },
-        { value: '362', label: 'W乌兰察布' },
-        { value: '199', label: 'W文山' },
-        { value: '237', label: 'W无锡' },
-        { value: '253', label: 'W芜湖' },
-        { value: '311', label: 'X西宁' },
-        { value: '324', label: 'X西安' },
-        { value: '327', label: 'X咸阳' },
-        { value: '84', label: 'X厦门' },
-        { value: '95', label: 'X孝感' },
-        { value: '97', label: 'X咸宁' },
-        { value: '101', label: 'X襄樊' },
-        { value: '363', label: 'X兴安' },
-        { value: '364', label: 'X锡林郭勒' },
-        { value: '367', label: 'X香港' },
-        { value: '114', label: 'X湘西' },
-        { value: '116', label: 'X湘潭' },
-        { value: '123', label: 'X新余' },
-        { value: '136', label: 'X新乡' },
-        { value: '139', label: 'X许昌' },
-        { value: '144', label: 'X信阳' },
-        { value: '201', label: 'X西双版纳' },
-        { value: '212', label: 'X邢台' },
-        { value: '232', label: 'X徐州' },
-        { value: '251', label: 'X宣城' },
-        { value: '264', label: 'Y玉林' },
-        { value: '46', label: 'Y阳江' },
-        { value: '51', label: 'Y云浮' },
-        { value: '308', label: 'Y伊犁哈萨克' },
-        { value: '317', label: 'Y玉树' },
-        { value: '319', label: 'Y银川' },
-        { value: '68', label: 'Y烟台' },
-        { value: '329', label: 'Y延安' },
-        { value: '331', label: 'Y榆林' },
-        { value: '347', label: 'Y伊春' },
-        { value: '104', label: 'Y宜昌' },
-        { value: '106', label: 'Y岳阳' },
-        { value: '109', label: 'Y益阳' },
-        { value: '111', label: 'Y永州' },
-        { value: '124', label: 'Y鹰潭' },
-        { value: '127', label: 'Y宜春' },
-        { value: '155', label: 'Y延边' },
-        { value: '162', label: 'Y营口' },
-        { value: '181', label: 'Y宜宾' },
-        { value: '185', label: 'Y雅安' },
-        { value: '193', label: 'Y玉溪' },
-        { value: '220', label: 'Y阳泉' },
-        { value: '225', label: 'Y运城' },
-        { value: '226', label: 'Y沂州' },
-        { value: '231', label: 'Y扬州' },
-        { value: '236', label: 'Y盐城' },
-        { value: '279', label: 'Z张掖' },
-        { value: '291', label: 'Z遵义' },
-        { value: '39', label: 'Z湛江' },
-        { value: '41', label: 'Z肇庆' },
-        { value: '49', label: 'Z中山' },
-        { value: '52', label: 'Z珠海' },
-        { value: '61', label: 'Z舟山' },
-        { value: '323', label: 'Z中卫' },
-        { value: '79', label: 'Z淄博' },
-        { value: '80', label: 'Z枣庄' },
-        { value: '89', label: 'Z漳州' },
-        { value: '108', label: 'Z张家界' },
-        { value: '115', label: 'Z株洲' },
-        { value: '130', label: 'Z郑州' },
-        { value: '145', label: 'Z周口' },
-        { value: '146', label: 'Z驻马店' },
-        { value: '171', label: 'Z自贡' },
-        { value: '187', label: 'Z资阳' },
-        { value: '213', label: 'Z张家口' },
-        { value: '241', label: 'Z镇江' }
-      ],
+      options: [{ value: '安顺', label: '安顺' },
+        { value: '阿克苏', label: '阿克苏' },
+        { value: '阿勒泰', label: '阿勒泰' },
+        { value: '安康', label: '安康' },
+        { value: '阿里', label: '阿里' },
+        { value: '阿拉善', label: '阿拉善' },
+        { value: '澳门', label: '澳门' },
+        { value: '安阳', label: '安阳' },
+        { value: '鞍山', label: '鞍山' },
+        { value: '阿坝', label: '阿坝' },
+        { value: '安庆', label: '安庆' },
+        { value: '北海', label: '北海' },
+        { value: '百色', label: '百色' },
+        { value: '白银', label: '白银' },
+        { value: '北京', label: '北京' },
+        { value: '毕节', label: '毕节' },
+        { value: '巴音郭楞蒙古', label: '巴音郭楞蒙古' },
+        { value: '博尔塔拉蒙古', label: '博尔塔拉蒙古' },
+        { value: '宝鸡', label: '宝鸡' },
+        { value: '滨州', label: '滨州' },
+        { value: '包头', label: '包头' },
+        { value: '巴彦淖尔', label: '巴彦淖尔' },
+        { value: '白山', label: '白山' },
+        { value: '白城', label: '白城' },
+        { value: '本溪', label: '本溪' },
+        { value: '巴中', label: '巴中' },
+        { value: '保山', label: '保山' },
+        { value: '保定', label: '保定' },
+        { value: '亳州', label: '亳州' },
+        { value: '蚌埠', label: '蚌埠' },
+        { value: '池州', label: '池州' },
+        { value: '崇左', label: '崇左' },
+        { value: '重庆', label: '重庆' },
+        { value: '潮州', label: '潮州' },
+        { value: '昌吉', label: '昌吉' },
+        { value: '昌都', label: '昌都' },
+        { value: '赤峰', label: '赤峰' },
+        { value: '长沙', label: '长沙' },
+        { value: '常德', label: '常德' },
+        { value: '郴州', label: '郴州' },
+        { value: '长春', label: '长春' },
+        { value: '朝阳', label: '朝阳' },
+        { value: '成都', label: '成都' },
+        { value: '楚雄', label: '楚雄' },
+        { value: '承德', label: '承德' },
+        { value: '沧州', label: '沧州' },
+        { value: '长治', label: '长治' },
+        { value: '常州', label: '常州' },
+        { value: '滁州', label: '滁州' },
+        { value: '巢湖', label: '巢湖' },
+        { value: '池州', label: '池州' },
+        { value: '定西', label: '定西' },
+        { value: '东莞', label: '东莞' },
+        { value: '德州', label: '德州' },
+        { value: '东营', label: '东营' },
+        { value: '大庆', label: '大庆' },
+        { value: '大兴安岭', label: '大兴安岭' },
+        { value: '大连', label: '大连' },
+        { value: '丹东', label: '丹东' },
+        { value: '德阳', label: '德阳' },
+        { value: '达州', label: '达州' },
+        { value: '大理', label: '大理' },
+        { value: '德宏', label: '德宏' },
+        { value: '迪庆', label: '迪庆' },
+        { value: '大同', label: '大同' },
+        { value: '鄂州', label: '鄂州' },
+        { value: '恩施', label: '恩施' },
+        { value: '鄂尔多斯', label: '鄂尔多斯' },
+        { value: '防城港', label: '防城港' },
+        { value: '佛山', label: '佛山' },
+        { value: '福州', label: '福州' },
+        { value: '抚州', label: '抚州' },
+        { value: '抚顺', label: '抚顺' },
+        { value: '阜新', label: '阜新' },
+        { value: '阜阳', label: '阜阳' },
+        { value: '贵港', label: '贵港' },
+        { value: '桂林', label: '桂林' },
+        { value: '甘南', label: '甘南' },
+        { value: '贵阳', label: '贵阳' },
+        { value: '广州', label: '广州' },
+        { value: '果洛', label: '果洛' },
+        { value: '固原', label: '固原' },
+        { value: '赣州', label: '赣州' },
+        { value: '广元', label: '广元' },
+        { value: '广安', label: '广安' },
+        { value: '甘孜', label: '甘孜' },
+        { value: '淮北', label: '淮北' },
+        { value: '贺州', label: '贺州' },
+        { value: '海口', label: '海口' },
+        { value: '惠州', label: '惠州' },
+        { value: '河源', label: '河源' },
+        { value: '哈密', label: '哈密' },
+        { value: '和田', label: '和田' },
+        { value: '杭州', label: '杭州' },
+        { value: '海东', label: '海东' },
+        { value: '湖州', label: '湖州' },
+        { value: '海北', label: '海北' },
+        { value: '黄南', label: '黄南' },
+        { value: '海南', label: '海南' },
+        { value: '海西', label: '海西' },
+        { value: '潍坊', label: '潍坊' },
+        { value: '汉中', label: '汉中' },
+        { value: '菏泽', label: '菏泽' },
+        { value: '哈尔滨', label: '哈尔滨' },
+        { value: '鹤岗', label: '鹤岗' },
+        { value: '黑河', label: '黑河' },
+        { value: '黄冈', label: '黄冈' },
+        { value: '呼和浩特', label: '呼和浩特' },
+        { value: '黄石', label: '黄石' },
+        { value: '呼伦贝尔', label: '呼伦贝尔' },
+        { value: '怀化', label: '怀化' },
+        { value: '衡阳', label: '衡阳' },
+        { value: '鹤壁', label: '鹤壁' },
+        { value: '葫芦岛', label: '葫芦岛' },
+        { value: '红河', label: '红河' },
+        { value: '邯郸', label: '邯郸' },
+        { value: '衡水', label: '衡水' },
+        { value: '淮安', label: '淮安' },
+        { value: '黄山', label: '黄山' },
+        { value: '合肥', label: '合肥' },
+        { value: '淮南', label: '淮南' },
+        { value: '嘉峪关', label: '嘉峪关' },
+        { value: '金昌', label: '金昌' },
+        { value: '酒泉', label: '酒泉' },
+        { value: '江门', label: '江门' },
+        { value: '揭阳', label: '揭阳' },
+        { value: '金华', label: '金华' },
+        { value: '嘉兴', label: '嘉兴' },
+        { value: '济宁', label: '济宁' },
+        { value: '济南', label: '济南' },
+        { value: '鸡西', label: '鸡西' },
+        { value: '佳木斯', label: '佳木斯' },
+        { value: '荆门', label: '荆门' },
+        { value: '荆州', label: '荆州' },
+        { value: '景德镇', label: '景德镇' },
+        { value: '九江', label: '九江' },
+        { value: '吉安', label: '吉安' },
+        { value: '焦作', label: '焦作' },
+        { value: '吉林', label: '吉林' },
+        { value: '锦州', label: '锦州' },
+        { value: '晋城', label: '晋城' },
+        { value: '晋中', label: '晋中' },
+        { value: '克拉玛依', label: '克拉玛依' },
+        { value: '喀什', label: '喀什' },
+        { value: '开封', label: '开封' },
+        { value: '昆明', label: '昆明' },
+        { value: '来宾', label: '来宾' },
+        { value: '柳州', label: '柳州' },
+        { value: '兰州', label: '兰州' },
+        { value: '陇南', label: '陇南' },
+        { value: '临夏', label: '临夏' },
+        { value: '六盘水', label: '六盘水' },
+        { value: '丽水', label: '丽水' },
+        { value: '莱芜', label: '莱芜' },
+        { value: '临沂', label: '临沂' },
+        { value: '聊城', label: '聊城' },
+        { value: '拉萨', label: '拉萨' },
+        { value: '林芝', label: '林芝' },
+        { value: '龙岩', label: '龙岩' },
+        { value: '娄底', label: '娄底' },
+        { value: '洛阳', label: '洛阳' },
+        { value: '漯河', label: '漯河' },
+        { value: '辽源', label: '辽源' },
+        { value: '辽阳', label: '辽阳' },
+        { value: '泸州', label: '泸州' },
+        { value: '乐山', label: '乐山' },
+        { value: '凉山', label: '凉山' },
+        { value: '丽江', label: '丽江' },
+        { value: '临沧', label: '临沧' },
+        { value: '廊坊', label: '廊坊' },
+        { value: '临汾', label: '临汾' },
+        { value: '吕梁', label: '吕梁' },
+        { value: '连云港', label: '连云港' },
+        { value: '六安', label: '六安' },
+        { value: '马鞍山', label: '马鞍山' },
+        { value: '茂名', label: '茂名' },
+        { value: '梅州', label: '梅州' },
+        { value: '牡丹江', label: '牡丹江' },
+        { value: '绵阳', label: '绵阳' },
+        { value: '眉山', label: '眉山' },
+        { value: '南宁', label: '南宁' },
+        { value: '宁波', label: '宁波' },
+        { value: '那曲', label: '那曲' },
+        { value: '宁德', label: '宁德' },
+        { value: '南平', label: '南平' },
+        { value: '南昌', label: '南昌' },
+        { value: '南阳', label: '南阳' },
+        { value: '内江', label: '内江' },
+        { value: '南充', label: '南充' },
+        { value: '怒江', label: '怒江' },
+        { value: '南京', label: '南京' },
+        { value: '南通', label: '南通' },
+        { value: '平凉', label: '平凉' },
+        { value: '莆田', label: '莆田' },
+        { value: '萍乡', label: '萍乡' },
+        { value: '平顶山', label: '平顶山' },
+        { value: '濮阳', label: '濮阳' },
+        { value: '盘锦', label: '盘锦' },
+        { value: '攀枝花', label: '攀枝花' },
+        { value: '普洱', label: '普洱' },
+        { value: '钦州', label: '钦州' },
+        { value: '庆阳', label: '庆阳' },
+        { value: '黔西南', label: '黔西南' },
+        { value: '黔东南', label: '黔东南' },
+        { value: '黔南', label: '黔南' },
+        { value: '清远', label: '清远' },
+        { value: '衢州', label: '衢州' },
+        { value: '青岛', label: '青岛' },
+        { value: '齐齐哈尔', label: '齐齐哈尔' },
+        { value: '泉州', label: '泉州' },
+        { value: '七台河', label: '七台河' },
+        { value: '曲靖', label: '曲靖' },
+        { value: '秦皇岛', label: '秦皇岛' },
+        { value: '日照', label: '日照' },
+        { value: '日喀则', label: '日喀则' },
+        { value: '上海', label: '上海' },
+        { value: '三亚', label: '三亚' },
+        { value: '深圳', label: '深圳' },
+        { value: '汕尾', label: '汕尾' },
+        { value: '汕头', label: '汕头' },
+        { value: '韶关', label: '韶关' },
+        { value: '绍兴', label: '绍兴' },
+        { value: '石嘴山', label: '石嘴山' },
+        { value: '商洛', label: '商洛' },
+        { value: '山南', label: '山南' },
+        { value: '三明', label: '三明' },
+        { value: '双鸭山', label: '双鸭山' },
+        { value: '绥化', label: '绥化' },
+        { value: '随州', label: '随州' },
+        { value: '十堰', label: '十堰' },
+        { value: '邵阳', label: '邵阳' },
+        { value: '上饶', label: '上饶' },
+        { value: '三门峡', label: '三门峡' },
+        { value: '商丘', label: '商丘' },
+        { value: '四平', label: '四平' },
+        { value: '松原', label: '松原' },
+        { value: '沈阳', label: '沈阳' },
+        { value: '遂宁', label: '遂宁' },
+        { value: '邵通', label: '邵通' },
+        { value: '石家庄', label: '石家庄' },
+        { value: '朔州', label: '朔州' },
+        { value: '宿迁', label: '宿迁' },
+        { value: '苏州', label: '苏州' },
+        { value: '宿州', label: '宿州' },
+        { value: '铜陵', label: '铜陵' },
+        { value: '天水', label: '天水' },
+        { value: '天津', label: '天津' },
+        { value: '铜仁', label: '铜仁' },
+        { value: '吐鲁番', label: '吐鲁番' },
+        { value: '塔城', label: '塔城' },
+        { value: '台州', label: '台州' },
+        { value: '泰安', label: '泰安' },
+        { value: '铜川', label: '铜川' },
+        { value: '通辽', label: '通辽' },
+        { value: '台湾', label: '台湾' },
+        { value: '通化', label: '通化' },
+        { value: '铁岭', label: '铁岭' },
+        { value: '唐山', label: '唐山' },
+        { value: '太原', label: '太原' },
+        { value: '泰州', label: '泰州' },
+        { value: '梧州', label: '梧州' },
+        { value: '武威', label: '武威' },
+        { value: '乌鲁木齐', label: '乌鲁木齐' },
+        { value: '温州', label: '温州' },
+        { value: '吴忠', label: '吴忠' },
+        { value: '威海', label: '威海' },
+        { value: '渭南', label: '渭南' },
+        { value: '武汉', label: '武汉' },
+        { value: '乌海', label: '乌海' },
+        { value: '乌兰察布', label: '乌兰察布' },
+        { value: '文山', label: '文山' },
+        { value: '无锡', label: '无锡' },
+        { value: '芜湖', label: '芜湖' },
+        { value: '西宁', label: '西宁' },
+        { value: '西安', label: '西安' },
+        { value: '咸阳', label: '咸阳' },
+        { value: '厦门', label: '厦门' },
+        { value: '孝感', label: '孝感' },
+        { value: '咸宁', label: '咸宁' },
+        { value: '襄樊', label: '襄樊' },
+        { value: '兴安', label: '兴安' },
+        { value: '锡林郭勒', label: '锡林郭勒' },
+        { value: '香港', label: '香港' },
+        { value: '湘西', label: '湘西' },
+        { value: '湘潭', label: '湘潭' },
+        { value: '新余', label: '新余' },
+        { value: '新乡', label: '新乡' },
+        { value: '许昌', label: '许昌' },
+        { value: '信阳', label: '信阳' },
+        { value: '西双版纳', label: '西双版纳' },
+        { value: '邢台', label: '邢台' },
+        { value: '徐州', label: '徐州' },
+        { value: '宣城', label: '宣城' },
+        { value: '玉林', label: '玉林' },
+        { value: '阳江', label: '阳江' },
+        { value: '云浮', label: '云浮' },
+        { value: '伊犁哈萨克', label: '伊犁哈萨克' },
+        { value: '玉树', label: '玉树' },
+        { value: '银川', label: '银川' },
+        { value: '烟台', label: '烟台' },
+        { value: '延安', label: '延安' },
+        { value: '榆林', label: '榆林' },
+        { value: '伊春', label: '伊春' },
+        { value: '宜昌', label: '宜昌' },
+        { value: '岳阳', label: '岳阳' },
+        { value: '益阳', label: '益阳' },
+        { value: '永州', label: '永州' },
+        { value: '鹰潭', label: '鹰潭' },
+        { value: '宜春', label: '宜春' },
+        { value: '延边', label: '延边' },
+        { value: '营口', label: '营口' },
+        { value: '宜宾', label: '宜宾' },
+        { value: '雅安', label: '雅安' },
+        { value: '玉溪', label: '玉溪' },
+        { value: '阳泉', label: '阳泉' },
+        { value: '运城', label: '运城' },
+        { value: '沂州', label: '沂州' },
+        { value: '扬州', label: '扬州' },
+        { value: '盐城', label: '盐城' },
+        { value: '张掖', label: '张掖' },
+        { value: '遵义', label: '遵义' },
+        { value: '湛江', label: '湛江' },
+        { value: '肇庆', label: '肇庆' },
+        { value: '中山', label: '中山' },
+        { value: '珠海', label: '珠海' },
+        { value: '舟山', label: '舟山' },
+        { value: '中卫', label: '中卫' },
+        { value: '淄博', label: '淄博' },
+        { value: '枣庄', label: '枣庄' },
+        { value: '漳州', label: '漳州' },
+        { value: '张家界', label: '张家界' },
+        { value: '株洲', label: '株洲' },
+        { value: '郑州', label: '郑州' },
+        { value: '周口', label: '周口' },
+        { value: '驻马店', label: '驻马店' },
+        { value: '自贡', label: '自贡' },
+        { value: '资阳', label: '资阳' },
+        { value: '张家口', label: '张家口' },
+        { value: '镇江', label: '镇江' }],
       zycps: [
         { value: 'KTV', label: 'KTV' },
         { value: '夜店', label: '夜店' },
@@ -544,50 +550,85 @@ export default {
     }
   },
   methods: {
+    checkUName () {
+      const uname = this.name
+      this.$api.post(
+        'http://lingduizhipin.com/admin/user/getUser', uname
+        ,
+        res => {
+          // console.info(res)
+          if (res.data !== '{code:1}') {
+            alert('登录账户已被使用, 请更换！')
+          }
+        }
+      )
+    },
     login () {
       this.$router.push({ path: '/home/login' })
     },
     register () {
-      const szcs = this.szcs
-      const dlzh = this.dlzh
+      // const szcs = this.szcs
+      // const dlzh = this.dlzh
       const sjhm = this.sjhm
       const cfmPWD = this.cfmPWD
       const pwsword = this.pwsword
-      const dzyx = this.dzyx
+      // const dzyx = this.dzyx
       const name = this.name
-      const lxdz = this.lxdz
-      const lxr = this.lxr
-      const lxdh = this.lxdh
-      const mrxfcs = this.mrxfcs
-      const zdfp = this.zdfp
-      const hylx = this.hylx
-      const yhlx = this.yhlx
+      // const lxdz = this.lxdz
+      // const lxr = this.lxr
+      // const lxdh = this.lxdh
+      // const mrxfcs = this.mrxfcs
+      // const zdfp = this.zdfp
+      // const hylx = this.hylx
+      // const yhlx = this.yhlx
       const yqm = this.yqm
-      const zycp = this.zycp
-      console.info(yqm)
-      this.$api.post('http://localhost/cyx/user/save',
+      // const zycp = this.zycp
+      // console.info(yqm)
+      if (sjhm === '' || sjhm === ' ') {
+        alert('手机号不能为空！')
+        return
+      }
+      if (yqm === '' || yqm === ' ') {
+        alert('邀请码不能为空，请联系管理员获取！')
+        return
+      }
+      if (name === '' || name === ' ') {
+        alert('用户名不能为空！')
+        return
+      }
+      if (pwsword === '' || pwsword === ' ') {
+        alert('密码不能为空！')
+        return
+      }
+      if (pwsword !== cfmPWD) {
+        alert('两次密码不一致！')
+        return
+      }
+      this.$api.post('http://lingduizhipin.com/admin/user/save',
         {
-          szcs,
-          dlzh,
+          // szcs,
+          // dlzh,
           sjhm,
           cfmPWD,
           pwsword,
-          dzyx,
+          // dzyx,
           name,
-          lxdz,
-          lxr,
-          lxdh,
-          mrxfcs,
-          zdfp,
-          hylx,
-          yhlx,
-          yqm,
-          zycp
+          // lxdz,
+          // lxr,
+          // lxdh,
+          // mrxfcs,
+          // zdfp,
+          // hylx,
+          // yhlx,
+          yqm
+          // zycp
         }, res => {
-          if (res.status === 200) {
+          // console.info(res)
+          if (res.data !== '-1|未检索到有效的邀请码' && res.data !== '-1|该用户已经注册') {
             alert('注册成功！')
+            this.$router.push({ path: '/home/usercenter' })
           } else {
-            alert('服务器开小差了@_@!')
+            alert(res.data)
           }
         })
     }

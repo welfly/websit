@@ -1,9 +1,25 @@
 <template>
   <div class>
     <div class="title_content">
-      <div class="title_content_date">免费发布领队信息网, 今天是{{ year }}年{{ month }}月{{ day }}日</div>
+      <div class="title_content_date">
+        免费发布领队信息网, 今天是{{ year }}年{{ month }}月{{ day }}日</div>
       <div class="title_content_date_fr">
-        <span class="tel">Tel: 188-8888-8888</span>
+        <span class="tel">Tel: 17816036909
+        </span>
+        <span v-if="show2Dcode">
+          <img
+            style="margin-bottom: 3px; cursor: pointer; position: absolute;
+            z-index: 100;
+            right: 80px;
+            top: 40px;
+            width: 126px;
+            box-shadow: 0 0 6px rgba(20,22,30,.5);"
+            src="../../static/img/2Dcode.png" >
+        </span>
+        <a href="tencent://message/?uin=793811595&Site=http://vps.shuidazhe.com&Menu=yes">
+          <img style="margin-bottom: 3px; cursor: pointer;" src="../../static/img/qq_btn.gif" >
+        </a>
+        <img style="margin-bottom: 3px; cursor: pointer;" src="../../static/img/weixin.png" @mouseenter="show2code" @mouseleave="hide2Dcode" >
         <span v-if=" isLogin === '1' || isLogin === null " class="login">
           <a href="#" @click="registered()">注册</a> |
           <a href="#" @click="login()">登录</a>
@@ -31,9 +47,9 @@
         <div class="col-sm" @click="goTo(2)">
           <a>免费发布</a>
         </div>
-        <div class="col-sm" @click="goTo(3)">
+        <!-- <div class="col-sm" @click="goTo(3)">
           <a>夜场直招</a>
-        </div>
+        </div> -->
         <div class="col-sm" @click="goTo(4)">
           <a>使用帮助</a>
         </div>
@@ -53,17 +69,25 @@
         <a>免责声明</a>&nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="#" @click="help">使用帮助</a>
       </div>
-      <div style="margin-bottom: 2em;">&copy;2020-2020 领队直聘 版权所有</div>
+      <div style="margin-bottom: 2em;">&copy;2020-{{ year }} 领队直聘 版权所有</div>
     </div>
   </div>
 </template>
 <script>
 // import $ from 'jquery'
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement('script')
+  hm.src = 'https://hm.baidu.com/hm.js?38a5b50cc0cc263cbb7a0b1de76cf498'
+  var s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(hm, s)
+})()
 export default {
   name: 'Index',
   data () {
     return {
       year: '',
+      show2Dcode: false,
       month: '',
       day: '',
       isLogin: '1',
@@ -80,6 +104,12 @@ export default {
     this.getSysTime()
   },
   methods: {
+    show2code () {
+      this.show2Dcode = true
+    },
+    hide2Dcode () {
+      this.show2Dcode = false
+    },
     userCenter () {
       this.$router.push({ path: '/home/usercenter' })
     },
@@ -100,6 +130,7 @@ export default {
         this.$router.push({ path: '/home/indexpage' })
       } else if (i === 2) {
         const isLog = sessionStorage.getItem('isLogin')
+        sessionStorage.setItem('isChangeData', '0')
         if (isLog === '1') {
           alert('您还未登录，请登录')
           this.$router.push({ path: '/home/login' })

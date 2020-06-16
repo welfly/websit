@@ -5,6 +5,13 @@
 </template>
 
 <script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement('script')
+  hm.src = 'https://hm.baidu.com/hm.js?38a5b50cc0cc263cbb7a0b1de76cf498'
+  var s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(hm, s)
+})()
 export default {
   name: 'App'
 }

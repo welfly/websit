@@ -38,17 +38,17 @@
     </div>
     <div>
       <a href="#">
-        <img style="margin-bottom: .5em;" src="../../static/img/1.jpg" >
+        <img style="margin-bottom: .5em; width: 1100px;" src="../../static/img/1.jpg" >
       </a>
       <a href="#">
-        <img style="margin-bottom: .5em;" src="../../static/img/2.jpg" >
+        <img style="margin-bottom: .5em; width: 1100px;" src="../../static/img/2.jpg" >
       </a>
       <a href="#">
-        <img style="margin-bottom: .5em;" src="../../static/img/3.jpg" >
+        <img style="margin-bottom: .5em; width: 1100px;" src="../../static/img/3.jpg" >
       </a>
-      <a href="#">
+      <!-- <a href="#">
         <img style="margin-bottom: .5em;" src="../../static/img/4.jpg" >
-      </a>
+      </a> -->
     </div>
 
     <div class="ad_main">
@@ -57,20 +57,36 @@
         <span @click="cls_left(1)">关闭</span>
       </div>-->
       <div class="main_content">
-        <span class="pub_content">最新发布</span>
-        <ul style="margin-top: 3em;">
-          <li
-            v-for="(news, i) of news_content"
-            :key="i"
-            class="pub_news"
-            @click="goTODetail(news.id)"
-          >
-            <a href="#">
+        <div
+          style="text-align: left;
+            background-color: #eaf6fb;
+            width: 300px;
+            color: #0b0505;
+            padding-left: 1em;">您当前位置：{{ localtion }}</div>
+        <span v-if="news_content.length !== 0">
+          <span class="pub_content">最新发布</span>
+          <ul style="margin-top: 3em; overflow: hidden;">
+            <li
+              v-for="(news, i) of news_content"
+              :key="i"
+              :title="news.bt +' —— '+ news.lxr"
+              class="pub_news"
+              @click="goTODetail(news.id)"
+            >
               <span>{{ news.bt }}</span>
-              <span class="pub_date">{{ news.fpsf }}省 {{ news.fpcs }} {{ news.fbqx }}</span>
-            </a>
-          </li>
-        </ul>
+              <span class="pub_date">{{ news.lxr }} <span style="color: #db5252;">{{ news.fbsj }}</span></span>
+              <span v-if="news.zhiding === '1'" style="background-color: red;color: white;     padding: 2px;">{{ news.tglw }}</span>
+            </li>
+            <li v-if="news_content_count % 2 !== 0" class="pub_news"/>
+          <!-- <li class="pub_news" title="阿道夫噶山东分公司的风格撒旦法森岛帆高a">阿道夫噶山东分公司的风格撒旦法森岛帆高a</li>
+          <li class="pub_news">森岛帆高是地方森岛帆高森岛帆高森岛帆高森岛帆高撒旦法告诉对方是个撒旦法公司的风格</li>
+          <li class="pub_news">十多个森岛帆高森岛帆高森岛帆高撒旦法森岛帆高森岛帆高森岛帆高森岛帆高撒旦法公司的风格森岛帆高森岛帆高</li>
+          <li class="pub_news">d</li> -->
+          </ul>
+        </span>
+        <div
+          v-else
+          style="  margin: 3em; font-size: 2em;"><span style="color: red;">{{ localtion }}</span> 暂未发布招聘信息</div>
         <div class="block">
           <el-pagination
             :current-page="currentPage"
@@ -87,13 +103,8 @@
            v-show="ad_right">
         <span @click="cls_left(2)">关闭</span>
       </div>-->
-      <div
-        style="height: 26em;
-            width: 12.8em;
-            float: left;
-            margin-left: 1em;"
-      >
-        <a href="#">
+      <div class="bttop" >
+        <!-- <a href="#">
           <img style="width: 12.8em;" src="../../static/img/5.jpg" >
         </a>
         <a href="#">
@@ -101,10 +112,17 @@
         </a>
         <a href="#">
           <img style="width: 12.8em; margin-top: 7px;" src="../../static/img/6.jpg" >
-        </a>
+        </a> -->
         <a
           href="javascript:window.scrollTo(0,0)"
-          style="position: fixed; bottom: 2em; background-color: wheat; width: 5em; height: 5em; line-height: 5em; margin-left: 2em;"
+          style="position: fixed;
+                bottom: 2em;
+                background-color: #e5e5e5;
+                width: 5em;
+                height: 5em;
+                line-height: 5em;
+                margin-left: 2em;
+                border-radius: 5em;"
           title="回到顶端"
         >回到顶端</a>
       </div>
@@ -112,6 +130,13 @@
   </div>
 </template>
 <script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement('script')
+  hm.src = 'https://hm.baidu.com/hm.js?38a5b50cc0cc263cbb7a0b1de76cf498'
+  var s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(hm, s)
+})()
 export default {
   name: 'IndexPage',
   data () {
@@ -125,13 +150,15 @@ export default {
       news_content: [], // 消息内容
       currentPage: 1,
       crtpageContent: [],
-      pageEve: [30, 70],
+      pageEve: [50, 100, 200, 500],
       evePageCount: 30,
       drawer: false,
       secOptions: [],
       selValue: '',
-      news_content_count: 0 // 总消息数
-
+      news_content_count: 0, // 总消息数
+      isClk: false,
+      clkID: 0,
+      localtion: '全国'
     }
   },
   mounted () {
@@ -148,22 +175,23 @@ export default {
       this.drawer = !this.drawer
     },
     goTODetail (i) {
-      window.open('http://118.25.137.189/wz/' + i + '.html')
+      this.isClk = true
+      this.clkID = i
+      window.open('http://lingduizhipin.com/wz/' + i + '.html')
     },
     handleSizeChange (val) { // 改变每页的数量
-      console.info(val)
       this.getNews(1, val, this.fBCity)
       this.evePageCount = val
       this.crtpageContent = []
     },
     handleCurrentChange (val) { //  切换页数
-      console.info(val, 22)
       this.currentPage = val
       this.crtpageContent = []
       this.getNews(val, this.evePageCount, this.fBCity)
     },
     getNews (pNum, lmt, fbCity) {
-      console.log(fbCity)
+      // console.log(fbCity)
+      this.localtion = fbCity || '全国'
       const pageNum = pNum
       const limit = lmt
       const fpcs = fbCity
@@ -173,15 +201,12 @@ export default {
         this.fBCity = fbCity
       }
       this.$api.post(
-        'http://localhost/cyx/wz/getWzPage', para
+        'http://lingduizhipin.com/admin/wz/getWzPage', para
         ,
         res => {
           if (res.status === 200) {
             this.news_content = res.data.data
             this.news_content_count = res.data.count
-            if (res.data.count > 1000) {
-              this.pageEve.push(100)
-            }
           }
         }
       )
@@ -302,7 +327,7 @@ export default {
     }
     .main_content {
       background-color: #fcfcfc;
-      width: 55em;
+      width: 91.7%;
       float: left;
       margin-left: 4.15%;
     }
@@ -323,19 +348,40 @@ export default {
       color: red;
       height: 1em;
     }
+    .pub_news_clk{
+      color: rgb(231, 110, 110);
+    }
     .pub_news {
       height: 1.8em;
       line-height: 1.8em;
       text-align: left;
-      margin-left: 2em;
-      & a{
-            color: black;
+      width: 542px;
+      margin-left: 3px;
+      display: inline-block;
+      border-bottom: 1px solid lightgrey;
+      cursor: pointer;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      &:hover{
+        background-color: rgb(229, 229, 229);
+        color: rgb(40, 141, 251);
       }
     }
     .pub_date {
       float: right;
-      margin-right: 2em;
     }
+  }
+  .bttop{
+      height: 26em;
+      width: 12.8em;
+      margin-left: 1em;
+      a{
+        box-shadow: 7px 6px 8px #88884F;
+        &:hover{
+          text-decoration:none;
+        }
+      }
   }
 }
 </style>

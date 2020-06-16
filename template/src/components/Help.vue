@@ -26,7 +26,7 @@
                 <span style="font-size:18px;color:#009900;"><strong>请保持文章的独一无二性，可以修改一部分内容，也可以全部是自己的手写原创，因为当有人搜索相关信息时，独一无二或原创的信息就会被搜索引擎排在首位。</strong></span>
                 <p>
                   <span style="color:#009900;font-family:monospace;font-size:18px;">
-                    <strong>领队在线网-领队招聘网（www.lingdui.com）是中国领队求职招聘第一网站，涵盖KTV招聘、酒吧招聘、夜总会招聘、夜店招聘、酒店招聘等各方面。自成立以来，我们一直致力于做好全国领队人才招聘的向导，并且就不断为实现这个目标而努力。</strong>
+                    <strong>领队直聘网（www.lingduizhipin.com）是中国领队求职招聘第一网站，涵盖KTV招聘、酒吧招聘、夜总会招聘、夜店招聘、酒店招聘等各方面。自成立以来，我们一直致力于做好全国领队人才招聘的向导，并且就不断为实现这个目标而努力。</strong>
                   </span>
                   <span style="font-size:18px;color:#009900;"><strong/></span>
                 </p>
@@ -38,7 +38,7 @@
                   <br>
                 </p>
                 <div style="text-align:center;">
-                  <span style="color:#E53333;font-size:32px;"><strong>《领队在线网守法发布规则》</strong></span>
+                  <span style="color:#E53333;font-size:32px;"><strong>《领队直聘在线网守法发布规则》</strong></span>
                 </div>
                 <b>&nbsp;</b><br>
                 <br>
@@ -55,7 +55,7 @@
                 <div style="text-align:center;"/>
                 <b>
                   <div style="text-align:center;">
-                    <b><span style="color:#337FE5;"><span style="font-size:18px;">领队在线网为</span><span style="color:#E53333;font-size:18px;">网警备案单位</span><span style="font-size:18px;">，我们将</span><span style="color:#E53333;font-size:18px;">严格执行网警要求</span><span style="font-size:18px;">的去运营网站！</span></span></b>
+                    <b><span style="color:#337FE5;"><span style="font-size:18px;">领队直聘网为</span><span style="color:#E53333;font-size:18px;">网警备案单位</span><span style="font-size:18px;">，我们将</span><span style="color:#E53333;font-size:18px;">严格执行网警要求</span><span style="font-size:18px;">的去运营网站！</span></span></b>
                   </div>
                 </b><b>
                   <div style="text-align:center;">
@@ -98,14 +98,14 @@
                 <b>⑥ 标题及内容中：<span style="color:#EE33EE;">禁止发布夸大性话语</span>，如保证赚钱，一夜暴富、一年可买房等同义词汇</b><br>
                 <b>⑦ 标题及内容中：禁止发布最大、最好、最豪华、首选等等等<span style="color:#EE33EE;">违反广告法</span>的夸大同义词汇</b><br>
                 <b>⑧ 标题及内容中：禁止上传任何女性、人民币或其他图片，<span style="color:#EE33EE;">只能上传KTV营业场所的图片</span></b><br>
-                <b>⑨ 上传的图片中：禁止印有以上及《领队在线网守法发布规则》中不允许的<span style="color:#EE33EE;">违规违法信息内容</span></b><br>
+                <b>⑨ 上传的图片中：禁止印有以上及《领队直聘在线网守法发布规则》中不允许的<span style="color:#EE33EE;">违规违法信息内容</span></b><br>
                 <b>⑩ 逃避风控检查：若您发布违规或违法关键词，本站将自动拦截，<span style="color:#EE33EE;">请您立即修改后再发布</span></b><br>
                 <br>
                 <div style="text-align:center;">
-                  <span style="font-size:24px;color:#337FE5;"><strong>若您发现有用户违反</strong><span style="color:#E53333;"><strong>《领队在线网守法发布规则》</strong></span><strong>请及时举报！我们将会立即删除！</strong></span>
+                  <span style="font-size:24px;color:#337FE5;"><strong>若您发现有用户违反</strong><span style="color:#E53333;"><strong>《领队直聘在线网守法发布规则》</strong></span><strong>请及时举报！我们将会立即删除！</strong></span>
                 </div>
                 <div style="text-align:center;">
-                  <span style="font-size:24px;color:#337FE5;"><strong>举报请您加微信号&nbsp; </strong><span style="color:#E53333;"><strong>ZTS5888</strong></span><strong>（请注明“</strong><span style="color:#000000;"><strong>违法信息举报</strong></span><strong>”）谢谢您的支持！</strong></span>
+                  <span style="font-size:24px;color:#337FE5;"><strong>举报请您加QQ/微信&nbsp; </strong><span style="color:#E53333;"><strong/></span><strong>（请注明“</strong><span style="color:#000000;"><strong>违法信息举报</strong></span><strong>”）谢谢您的支持！</strong></span>
                 </div>
               </div>
             </div>
@@ -118,6 +118,13 @@
   </div>
 </template>
 <script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement('script')
+  hm.src = 'https://hm.baidu.com/hm.js?38a5b50cc0cc263cbb7a0b1de76cf498'
+  var s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(hm, s)
+})()
 export default {
   data () {
     return {

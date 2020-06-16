@@ -37,6 +37,13 @@
   </div>
 </template>
 <script>
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement('script')
+  hm.src = 'https://hm.baidu.com/hm.js?38a5b50cc0cc263cbb7a0b1de76cf498'
+  var s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(hm, s)
+})()
 export default {
   data () {
     return {
@@ -51,10 +58,11 @@ export default {
     login () {
       const name = this.loginVal
       const pwsword = this.loginPWDVal
-      this.$api.post('http://localhost/cyx/user/loginqt',
+      this.$api.post('http://lingduizhipin.com/admin/user/loginqt',
         {
           name, pwsword
         }, res => {
+          // console.info(res)
           if (res && res.data !== -1) {
             const uname = res.data.name + ''
             sessionStorage.setItem('userMsg', uname)

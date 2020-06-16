@@ -10,7 +10,8 @@
             size="medium"
             placeholder="请选择发布省份"
             @change="getCt(fpsf)"
-            @blur="cls">
+            @blur="cls"
+            @click="getCitys">
             <el-option
               v-for="item in provinces"
               :key="item.code"
@@ -122,8 +123,8 @@
         <td>发布地址：</td>
         <td>
           <el-input
-            v-model="fpdz"
-            placeholder="请输入招聘地址"
+            v-model="weixin"
+            placeholder="请输入招聘人微信"
             clearable/>
         </td>
       </tr>
@@ -140,6 +141,13 @@
 
 <script>
 import EditorBox from './Editor'
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement('script')
+  hm.src = 'https://hm.baidu.com/hm.js?38a5b50cc0cc263cbb7a0b1de76cf498'
+  var s = document.getElementsByTagName('script')[0]
+  s.parentNode.insertBefore(hm, s)
+})()
 export default {
   name: 'FreePublish',
   components: {
@@ -155,7 +163,7 @@ export default {
       fpsf: '',
       fpcs: '',
       cts: [],
-      xxlxs: ['KTV', '夜场', '酒吧'],
+      xxlxs: ['酒吧招聘', '夜店招聘', 'KTV招聘', '夜总会招聘', '夜场招聘'],
       xxlx: '',
       bt: '',
       bq: '',
@@ -167,13 +175,15 @@ export default {
       shbz: '',
       fbqx: '',
       fpdz: '',
+      weixin: '',
       changeData: {}
     }
   },
   mounted () {
     this.getCitys()
     this.changeData = JSON.parse(sessionStorage.getItem('changeData'))
-    if (this.changeData) {
+    const isChangeData = sessionStorage.getItem('isChangeData')
+    if (isChangeData === '1' && this.changeData && this.changeData !== null) {
       this.bt = this.changeData.bt
       this.nr = this.changeData.nr
       this.fpsf = this.changeData.fpsf
@@ -186,6 +196,7 @@ export default {
       this.shbz = this.changeData.shbz
       this.fbqx = this.changeData.fbqx
       this.fpdz = this.changeData.fpdz
+      this.weixin = this.changeData.weixin
     }
   },
   methods: {
@@ -261,15 +272,15 @@ export default {
         alert('未填写联系电话！！')
         return
       }
-      const shbz = this.shbz
+      // const shbz = this.shbz
       const fbqx = this.fbqx
       if (fbqx === '') {
         alert('未填写发布区县！！')
         return
       }
-      const fpdz = this.fpdz
-      if (fpdz === '') {
-        alert('未填写发布地址！！')
+      const weixin = this.weixin
+      if (weixin === '') {
+        alert('未填写发布人微信！！')
         return
       }
       if (nr === '') {
@@ -277,12 +288,12 @@ export default {
         return
       }
       const yxbz = '1'
-      this.$api.post('http://localhost/cyx/wz/saveWz',
+      this.$api.post('http://lingduizhipin.com/admin/wz/saveWz',
         {
-          fpsf, fpcs, xxlx, bt, bq, nr, tp, qymc, lxr, lxdh, shbz, fbqx, fpdz, yxbz
+          fpsf, fpcs, xxlx, bt, bq, nr, tp, qymc, lxr, lxdh, fbqx, yxbz, weixin
         }, res => {
           if (res.status === 200) {
-            alert(res.data)
+            alert(res.data.data)
           } else {
             alert('服务器开小差了@_@!')
           }
