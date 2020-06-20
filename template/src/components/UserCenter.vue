@@ -761,7 +761,7 @@ export default {
       this.getNewsByUser(this.pageNum, this.limit)
     },
     watchClick (id) {
-      window.open('http://lingduizhipin.com/admin/wz/' + id + '.html')
+      window.open('http://lingduizhipin.com/wz/' + id + '.html')
     },
     handleClick (tab, event) {
       // console.log(tab, event)
@@ -822,11 +822,11 @@ export default {
           id, pwsword
         }, res => {
           // console.info(res)
-          if (res.data !== -1) {
-            alert('密码修改成功！')
-          } else {
-            alert('服务器开小差了@_@!')
+          if ((res.data).indexOf('-1') === 0) {
             sessionStorage.setItem('isLogin', '1')
+            alert('服务器开小差了@_@!')
+          } else {
+            alert('密码修改成功！')
           }
         })
     },

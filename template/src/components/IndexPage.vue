@@ -73,9 +73,15 @@
               class="pub_news"
               @click="goTODetail(news.id)"
             >
-              <span>{{ news.bt }}</span>
+              <span
+                style="overflow: hidden;
+                      white-space: nowrap;
+                      text-overflow: ellipsis;
+                      display: inline-block;
+                      width: 360px;">
+                <span v-if="news.zhiding === '1'" style="background-color: red;color: white; padding: 2px;">{{ news.tglw }}</span>
+                {{ news.bt }}</span>
               <span class="pub_date">{{ news.lxr }} <span style="color: #db5252;">{{ news.fbsj }}</span></span>
-              <span v-if="news.zhiding === '1'" style="background-color: red;color: white;     padding: 2px;">{{ news.tglw }}</span>
             </li>
             <li v-if="news_content_count % 2 !== 0" class="pub_news"/>
           <!-- <li class="pub_news" title="阿道夫噶山东分公司的风格撒旦法森岛帆高a">阿道夫噶山东分公司的风格撒旦法森岛帆高a</li>
@@ -355,14 +361,12 @@ export default {
       height: 1.8em;
       line-height: 1.8em;
       text-align: left;
-      width: 542px;
+      width: 520px;
       margin-left: 3px;
       display: inline-block;
       border-bottom: 1px solid lightgrey;
       cursor: pointer;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+    margin: 5px 15px;
       &:hover{
         background-color: rgb(229, 229, 229);
         color: rgb(40, 141, 251);

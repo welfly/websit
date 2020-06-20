@@ -161,7 +161,11 @@ export default {
           }).then(res => {
             const { data } = res
             // 插入图片到editor
-            self.editor.cmd.do('insertHtml', '<img src="' + data.data.src + '" style="max-width:100%;"/>')
+            if (data) {
+              self.editor.cmd.do('insertHtml', '<img src="' + data.data.src + '" style="max-width:100%;"/>')
+            } else {
+              alert('上传图片只能为jpg/png格式，大小为1M')
+            }
           })
         }
       })

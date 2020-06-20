@@ -120,7 +120,7 @@
         </td>
       </tr>
       <tr class="td">
-        <td>发布地址：</td>
+        <td>招聘人微信：</td>
         <td>
           <el-input
             v-model="weixin"
@@ -292,10 +292,12 @@ export default {
         {
           fpsf, fpcs, xxlx, bt, bq, nr, tp, qymc, lxr, lxdh, fbqx, yxbz, weixin
         }, res => {
-          if (res.status === 200) {
-            alert(res.data.data)
+          console.log(res)
+          if ((res.data).indexOf('-1') === 0) {
+            alert('发布失败！')
           } else {
-            alert('服务器开小差了@_@!')
+            alert('发布成功！将前往“用户中心/管理我的信息”中查看！!')
+            this.$router.push({ path: '/home/usercenter' })
           }
         })
     },
