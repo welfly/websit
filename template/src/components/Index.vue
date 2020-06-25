@@ -25,7 +25,7 @@
           <a href="#" @click="login()">登录</a>
         </span>
         <span v-else class="login">
-          <a href="#">{{ userName }}</a> |
+          <a>{{ userName }}</a> |
           <a href="#" @click="userCenter()">用户中心</a> |
           <a href="#" @click="userLoginOut()">退出</a>
         </span>
@@ -41,9 +41,12 @@
     </div>
     <div class="container indexCSS">
       <div class="row">
-        <div class="col-sm" @click="goTo(1)">
-          <a>首页</a>
-        </div>
+        <a class="col-sm aa" href="http://www.lingduizhipin.com">
+          <!-- <div class="col-sm" @click="goTo(1)"> -->
+          <div class="col-sm">
+            <a>首页</a>
+          </div>
+        </a>
         <div class="col-sm" @click="goTo(2)">
           <a>免费发布</a>
         </div>
@@ -91,17 +94,31 @@ export default {
       month: '',
       day: '',
       isLogin: '1',
-      userName: sessionStorage.getItem('userMsg')
-        ? sessionStorage.getItem('userMsg')
+      userName: localStorage.getItem('userMsg')
+        ? localStorage.getItem('userMsg')
         : 'null'
     }
   },
   beforeUpdate () {
-    this.isLogin = sessionStorage.getItem('isLogin')
-    this.userName = sessionStorage.getItem('userMsg')
+    this.isLogin = localStorage.getItem('isLogin')
+    this.userName = localStorage.getItem('userMsg')
   },
   mounted () {
     this.getSysTime()
+    this.$api.post('admin/user/queryUserCurrent', {}, res => {
+      if (res.data !== '-1|登录失败') {
+        localStorage.setItem('userMsg', res.data.uname)
+        localStorage.setItem('isLogin', '0')
+        localStorage.setItem('id', res.data.id)
+        const isL = localStorage.setItem('isLogin', '0')
+        this.$emit('toPar', isL)
+        // this.$router.push({ path: '/home/usercenter' })
+        // alert('登录成功！')
+      } else {
+        localStorage.setItem('userMsg', {})
+        localStorage.setItem('isLogin', '1')
+      }
+    })
   },
   methods: {
     show2code () {
@@ -114,9 +131,14 @@ export default {
       this.$router.push({ path: '/home/usercenter' })
     },
     userLoginOut () {
-      sessionStorage.setItem('userMsg', {})
-      sessionStorage.setItem('isLogin', '1')
+      localStorage.setItem('userMsg', {})
+      localStorage.setItem('isLogin', '1')
+
       this.isLogin = '1'
+      this.$api.post('admin/user/logout', {}, res => {
+        console.log(res)
+        console.log('登出')
+      })
       this.$router.push({ path: '/home/indexpage' })
     },
     getSysTime () {
@@ -127,10 +149,12 @@ export default {
     },
     goTo (i) {
       if (i === 1) {
-        this.$router.push({ path: '/home/indexpage' })
+        this.$router.push({ path: '/' })
+        // window.location.replace = 'www.lingduizhipin.com'
+        // window.location.reload()
       } else if (i === 2) {
-        const isLog = sessionStorage.getItem('isLogin')
-        sessionStorage.setItem('isChangeData', '0')
+        const isLog = localStorage.getItem('isLogin')
+        localStorage.setItem('isChangeData', '0')
         if (isLog === '1') {
           alert('您还未登录，请登录')
           this.$router.push({ path: '/home/login' })
@@ -156,6 +180,12 @@ export default {
 }
 </script>
 <style scoped lang="less">
+.aa{
+  color: white;
+  &:hover{
+    text-decoration: none;
+  }
+}
 .search_css {
   height: 2em;
   line-height: 2em;

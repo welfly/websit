@@ -553,7 +553,7 @@ export default {
     checkUName () {
       const uname = this.name
       this.$api.post(
-        'http://lingduizhipin.com/admin/user/getUser', uname
+        'admin/user/getUser', uname
         ,
         res => {
           // console.info(res)
@@ -604,7 +604,7 @@ export default {
         alert('两次密码不一致！')
         return
       }
-      this.$api.post('http://lingduizhipin.com/admin/user/save',
+      this.$api.post('admin/user/save',
         {
           // szcs,
           // dlzh,

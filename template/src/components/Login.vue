@@ -58,24 +58,23 @@ export default {
     login () {
       const name = this.loginVal
       const pwsword = this.loginPWDVal
-      this.$api.post('http://lingduizhipin.com/admin/user/loginqt',
+      this.$api.post('admin/user/loginqt',
         {
           name, pwsword
         }, res => {
           // console.info(res)
           if (res && res.data !== -1) {
             const uname = res.data.name + ''
-            sessionStorage.setItem('userMsg', uname)
-            sessionStorage.setItem('isLogin', '0')
-            sessionStorage.setItem('id', res.data.id)
-
-            const isL = sessionStorage.setItem('isLogin', '0')
+            localStorage.setItem('userMsg', uname)
+            localStorage.setItem('isLogin', '0')
+            localStorage.setItem('id', res.data.id)
+            const isL = localStorage.setItem('isLogin', '0')
             this.$emit('toPar', isL)
             this.$router.push({ path: '/home/usercenter' })
             alert('登录成功！')
           } else {
             alert('用户名或密码错误！')
-            sessionStorage.setItem('isLogin', '1')
+            localStorage.setItem('isLogin', '1')
           }
         })
     }

@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/home/login') {
     next()
   } else { // 进入的不是登录路由
-    if (to.meta.requiresAuth && sessionStorage.getItem('isLogin') !== '0') {
+    if (to.meta.requiresAuth && localStorage.getItem('isLogin') !== '0') {
       next({ path: '/home/login' })
     } else {
       next()

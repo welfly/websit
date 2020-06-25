@@ -183,7 +183,7 @@ export default {
     goTODetail (i) {
       this.isClk = true
       this.clkID = i
-      window.open('http://lingduizhipin.com/wz/' + i + '.html')
+      window.open('wz/' + i + '.html')
     },
     handleSizeChange (val) { // 改变每页的数量
       this.getNews(1, val, this.fBCity)
@@ -207,7 +207,7 @@ export default {
         this.fBCity = fbCity
       }
       this.$api.post(
-        'http://lingduizhipin.com/admin/wz/getWzPage', para
+        'admin/wz/getWzPage', para
         ,
         res => {
           if (res.status === 200) {

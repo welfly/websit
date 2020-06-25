@@ -123,9 +123,9 @@ export default {
         self.editor.create()
         const eds = document.getElementsByClassName('w-e-text-container')
         eds[0].style = eds[0].style.cssText + 'height: 500px'
-        const isChangeDa = sessionStorage.getItem('isChangeData')
-        if (isChangeDa === '1' && JSON.parse(sessionStorage.getItem('changeData'))) {
-          self.editor.txt.html(JSON.parse(sessionStorage.getItem('changeData')).nr)
+        const isChangeDa = localStorage.getItem('isChangeData')
+        if (isChangeDa === '1' && JSON.parse(localStorage.getItem('changeData'))) {
+          self.editor.txt.html(JSON.parse(localStorage.getItem('changeData')).nr)
         }
       })
     },
@@ -154,7 +154,7 @@ export default {
           // Object.keys(self.uploadImgForm).forEach((key) => {
           formdata.append('file', blob, self.uploadImgForm.Name)
           // })
-          axios.post('http://lingduizhipin.com/admin/tp/upload', formdata, {
+          axios.post('admin/tp/upload', formdata, {
             headers: {
               'Content-Type': 'text/plain;charset=UTF-8'
             }

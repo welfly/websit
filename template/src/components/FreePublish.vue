@@ -59,7 +59,7 @@
             clearable/>
         </td>
       </tr>
-      <tr class="td">
+      <!-- <tr class="td">
         <td>标签：</td>
         <td>
           <el-input
@@ -67,7 +67,7 @@
             placeholder="请输入标签"
             clearable/>
         </td>
-      </tr>
+      </tr> -->
       <tr class="td">
         <td>内容：</td>
         <td style="width: 50em">
@@ -79,7 +79,8 @@
         <td>
           <el-input
             v-model="qymc"
-            placeholder="请输入企业名称"
+            maxlength="10"
+            placeholder="请输入企业名称（最长10个字）"
             clearable/>
         </td>
       </tr>
@@ -89,7 +90,8 @@
         <td>
           <el-input
             v-model="lxr"
-            placeholder="请输入招聘联系人"
+            maxlength="5"
+            placeholder="请输入招聘联系人（最长5个字）"
             clearable/>
         </td>
       </tr>
@@ -102,15 +104,15 @@
             clearable/>
         </td>
       </tr>
-      <tr class="td">
+      <!-- <tr class="td">
         <td>审核标志：</td>
         <td>
           <el-input
             v-model="shbz"
             disabled/>
         </td>
-      </tr>
-      <tr class="td">
+      </tr> -->
+      <!-- <tr class="td">
         <td>发布区县：</td>
         <td>
           <el-input
@@ -118,7 +120,7 @@
             placeholder="请输入招聘区县"
             clearable/>
         </td>
-      </tr>
+      </tr> -->
       <tr class="td">
         <td>招聘人微信：</td>
         <td>
@@ -181,20 +183,20 @@ export default {
   },
   mounted () {
     this.getCitys()
-    this.changeData = JSON.parse(sessionStorage.getItem('changeData'))
-    const isChangeData = sessionStorage.getItem('isChangeData')
+    this.changeData = JSON.parse(localStorage.getItem('changeData'))
+    const isChangeData = localStorage.getItem('isChangeData')
     if (isChangeData === '1' && this.changeData && this.changeData !== null) {
       this.bt = this.changeData.bt
       this.nr = this.changeData.nr
       this.fpsf = this.changeData.fpsf
       this.fpcs = this.changeData.fpcs
       this.xxlx = this.changeData.xxlx
-      this.bq = this.changeData.bq
+      // this.bq = this.changeData.bq
       this.qymc = this.changeData.qymc
       this.lxr = this.changeData.lxr
       this.lxdh = this.changeData.lxdh
-      this.shbz = this.changeData.shbz
-      this.fbqx = this.changeData.fbqx
+      // this.shbz = this.changeData.shbz
+      // this.fbqx = this.changeData.fbqx
       this.fpdz = this.changeData.fpdz
       this.weixin = this.changeData.weixin
     }
@@ -249,55 +251,57 @@ export default {
         alert('未填写标题！！')
         return
       }
-      const bq = this.bq
-      if (bt === '') {
-        alert('未填写标签！！')
-        return
-      }
+      // const bq = this.bq
+      // if (bq === '') {
+      //   alert('未填写标签！！')
+      //   return
+      // }
       const nr = this.nr
       const tp = this.tp
 
       const qymc = this.qymc
-      if (qymc === '') {
-        alert('未填写企业名称！！')
-        return
-      }
+      // if (qymc === '') {
+      //   alert('未填写企业名称！！')
+      //   return
+      // }
       const lxr = this.lxr
-      if (lxr === '') {
-        alert('未填写联系人！！')
-        return
-      }
+      // if (lxr === '') {
+      //   alert('未填写联系人！！')
+      //   return
+      // }
       const lxdh = this.lxdh
-      if (lxdh === '') {
-        alert('未填写联系电话！！')
-        return
-      }
+      // if (lxdh === '') {
+      //   alert('未填写联系电话！！')
+      //   return
+      // }
       // const shbz = this.shbz
-      const fbqx = this.fbqx
-      if (fbqx === '') {
-        alert('未填写发布区县！！')
-        return
-      }
+      // const fbqx = this.fbqx
+      // if (fbqx === '') {
+      //   alert('未填写发布区县！！')
+      //   return
+      // }
       const weixin = this.weixin
-      if (weixin === '') {
-        alert('未填写发布人微信！！')
-        return
-      }
+      // if (weixin === '') {
+      //   alert('未填写发布人微信！！')
+      //   return
+      // }
       if (nr === '') {
-        alert('未填写任何发布内容！！')
+        alert('未填写任何发布内容，请点击内容！')
         return
       }
       const yxbz = '1'
-      this.$api.post('http://lingduizhipin.com/admin/wz/saveWz',
+      this.$api.post('admin/wz/saveWz',
         {
-          fpsf, fpcs, xxlx, bt, bq, nr, tp, qymc, lxr, lxdh, fbqx, yxbz, weixin
+          fpsf, fpcs, xxlx, bt, nr, tp, qymc, lxr, lxdh, yxbz, weixin
         }, res => {
           console.log(res)
-          if ((res.data).indexOf('-1') === 0) {
-            alert('发布失败！')
+          if (typeof (res.data) !== 'object') {
+            alert('发布失败！' + res.data)
           } else {
-            alert('发布成功！将前往“用户中心/管理我的信息”中查看！!')
-            this.$router.push({ path: '/home/usercenter' })
+            alert('发布成功！将打开新的窗口查看!')
+            window.open('wz/' + res.data.id + '.html')
+
+            // this.$router.push({ path: '/home/usercenter' })
           }
         })
     },

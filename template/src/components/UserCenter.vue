@@ -89,11 +89,11 @@
         </el-col>
         <div class="pane_r">
           <div v-if="show === 1">
-            <div>
-              您当前是<span class="odUser">普通用户</span>：您每天可以发布 1 条信息，今日已发布<span class="odU"> {{ odU }} </span>条，还可以发布<span class="odU"> {{ 1-odU }} </span>条
+            <div v-if="whichU != 'vip会员'">
+              您当前是<span class="odUser">{{ whichU }}</span>：您每天可以发布 {{ mrxfcs }} 条信息，今日已发布<span class="odU"> {{ yfcs }} </span>条，还可以发布<span class="odU"> {{ mrxfcs - yfcs }} </span>条
             </div>
-            <div>
-              您当前是<span class="odUser">VIP会员</span>：您每天可以发布 100 条信息，今日已发布<span class="odU"> {{ odU }} </span>条，还可以发布<span class="odU"> {{ 100-odU }} </span>条
+            <div v-else>
+              您当前是<span class="odUser">{{ whichU }}</span>：您每天可以发布 {{ mrxfcs }} 条信息，今日已发布<span class="odU"> {{ yfcs }} </span>条，还可以发布<span class="odU">  {{ mrxfcs - yfcs }}  </span>条
             </div>
           </div>
 
@@ -746,8 +746,24 @@ export default {
       evePageCount: 6,
       news_content_count: 0,
       pageNum: 1,
-      limit: 6
+      limit: 6,
+      whichU: '',
+      mrxfcs: 0,
+      yfcs: 0
+
     }
+  },
+  mounted () {
+    this.$api.post('admin/user/queryUserInfo', {}, res => {
+      if (res.data !== '-1|登录失败') {
+        this.whichU = res.data.user.yhlx
+        this.mrxfcs = res.data.userInfo.mrxfcs
+        this.yfcs = res.data.userInfo.yfcs
+      } else {
+        alert('请退出重新登录')
+        this.$router.push({ path: '/home/indexpage' })
+      }
+    })
   },
   methods: {
     sizeChange (v) {
@@ -761,13 +777,13 @@ export default {
       this.getNewsByUser(this.pageNum, this.limit)
     },
     watchClick (id) {
-      window.open('http://lingduizhipin.com/wz/' + id + '.html')
+      window.open('wz/' + id + '.html')
     },
     handleClick (tab, event) {
       // console.log(tab, event)
     },
     getNewsByUser (pageNum, limit) {
-      this.$api.post('http://lingduizhipin.com/admin/wz/getWzPageByUser', { pageNum, limit }, res => {
+      this.$api.post('admin/wz/getWzPageByUser', { pageNum, limit }, res => {
         this.norTableData = res.data.data
         this.news_content_count = res.data.count
       })
@@ -779,7 +795,7 @@ export default {
         this.show = i
       } else if (i === 31) {
         this.show = i
-        sessionStorage.setItem('isChangeData', '0')
+        localStorage.setItem('isChangeData', '0')
         this.$router.push({ path: '/home/freepublish' })
       } else if (i === 321) {
         this.show = i
@@ -790,7 +806,7 @@ export default {
         const shbz = '审核中'
         const pageNum = 1
         const limit = 1000
-        this.$api.post('http://lingduizhipin.com/admin/wz/getWzPageByUser', { shbz, pageNum, limit }, res => {
+        this.$api.post('admin/wz/getWzPageByUser', { shbz, pageNum, limit }, res => {
           // console.info(res)
         })
       } else if (i === 41) {
@@ -816,14 +832,14 @@ export default {
       }
       // const oldPwd = this.oldPwd
       const pwsword = this.newPWD
-      const id = sessionStorage.getItem('id')
-      this.$api.post('http://lingduizhipin.com/admin/user/updatePsw',
+      const id = localStorage.getItem('id')
+      this.$api.post('admin/user/updatePsw',
         {
           id, pwsword
         }, res => {
           // console.info(res)
           if ((res.data).indexOf('-1') === 0) {
-            sessionStorage.setItem('isLogin', '1')
+            localStorage.setItem('isLogin', '1')
             alert('服务器开小差了@_@!')
           } else {
             alert('密码修改成功！')
@@ -831,12 +847,12 @@ export default {
         })
     },
     changeClick (row) {
-      sessionStorage.setItem('changeData', JSON.stringify(row))
+      localStorage.setItem('changeData', JSON.stringify(row))
       if (row.shbz === '已发布') {
         alert('“已发布”的内容不能再修改！')
         return
       }
-      sessionStorage.setItem('isChangeData', '1') // 1 表示在用户中心修改
+      localStorage.setItem('isChangeData', '1') // 1 表示在用户中心修改
       this.$router.push({ path: '/home/freepublish' })
     },
     tableRowClassName ({ row, rowIndex }) {
@@ -849,6 +865,7 @@ export default {
       }
     }
   }
+
 }
 </script>
 <style lang="less" scoped>
